@@ -6,6 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--text area-->
 
+    <TextView
+        android:id="@+id/text_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Language"
+        android:textSize="25dp"
+        android:textAllCaps="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <!--select english button-->
+
+        <LinearLayout
+
+            android:id="@+id/guj_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatButton
+                android:padding="10dp"
+                android:layout_width="60pt"
+                android:layout_height="60pt"
+                android:background="@drawable/roundshape"
+                android:text="A"
+                android:textSize="50dp"
+                />
+        </LinearLayout>
+
+       <!--select gujrati butoon-->
+
+        <LinearLayout
+            android:id="@+id/eng_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/guj_button"
+            android:layout_marginTop="25pt">
+
+            <android.support.v7.widget.AppCompatButton
+                android:padding="10dp"
+                android:layout_width="60pt"
+                android:layout_height="60pt"
+                android:background="@drawable/roundshape"
+                android:text="અ"
+                android:textSize="50dp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </RelativeLayout>
