@@ -6,5 +6,6 @@
     <color name="colorSecondaryPrimary">#9ccc65</color>
     <color name="colorSecondaryPrimaryDark">#6b9b37</color>
     <color name="colorSecondaryAccent">#cfff95</color>
+    <color name="non">#00000000</color>
 
 </resources>
