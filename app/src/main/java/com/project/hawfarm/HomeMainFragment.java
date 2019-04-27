@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HomeMainActivity extends Fragment {
+public class HomeMainFragment extends Fragment {
 
     View mainView;
 

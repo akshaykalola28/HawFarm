@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        getFragmentManager().beginTransaction().replace(R.id.home_fragment,new HomeMainActivity()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.home_fragment,new HomeMainFragment()).commit();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_demo) {
-
+            getFragmentManager().beginTransaction().replace(R.id.home_fragment,new ItemListFragment()).commit();
         } else if (id == R.id.nav_share){
 
         }

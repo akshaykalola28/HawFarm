@@ -11,8 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ForgotPassword"></activity>
-        <activity android:name=".HomeMainActivity" />
+        <activity android:name=".ItemListFragment"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".HomeMainFragment" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"

@@ -11,6 +11,7 @@ public class LogInActivity extends AppCompatActivity {
 
     TextView signUp;
     Button logInButton;
+    TextView forgotPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class LogInActivity extends AppCompatActivity {
 
         signUp = findViewById(R.id.link_signup);
         logInButton = findViewById(R.id.btn_login);
+        forgotPass = findViewById(R.id.forgot_pass);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +34,13 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LogInActivity.this, HomeActivity.class));
+            }
+        });
+
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LogInActivity.this, ForgotPassword.class));
             }
         });
     }

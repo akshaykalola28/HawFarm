@@ -28,4 +28,5 @@
     <string name="menu_send">Send</string>
     <string name="log_out">Log Out</string>
     <string name="send">SEND</string>
+    <string name="hawkers_name">Hawkers Name</string>
 </resources>
