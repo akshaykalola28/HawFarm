@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-       android:layout_centerVertical="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <!--select english button-->
@@ -40,15 +40,15 @@
                 android:padding="10dp"
                 android:text="A"
                 android:textSize="50dp" />
+
             <TextView
-                android:paddingTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="2dp"
                 android:text="English"
-                android:textSize="15dp"
-                android:textAllCaps="true"
                 android:textAlignment="center"
-                />
+                android:textAllCaps="true"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -69,15 +69,15 @@
                 android:padding="10dp"
                 android:text="અ"
                 android:textSize="50dp" />
+
             <TextView
-                android:paddingTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="2dp"
                 android:text="ગુજરાતી"
-                android:textSize="15dp"
-                android:textAllCaps="true"
                 android:textAlignment="center"
-                />
+                android:textAllCaps="true"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
