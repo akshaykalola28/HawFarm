@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-class ImageAdapter extends PagerAdapter{
+class Slider extends PagerAdapter{
 
         Context mContext;
 
-        ImageAdapter(Context context) {
+        Slider(Context context) {
             this.mContext = context;
         }
 
