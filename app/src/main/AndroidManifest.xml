@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ItemListFragment"></activity>
+        <activity android:name=".OrderDetails"></activity>
+        <activity android:name=".ItemListFragment" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".HomeMainFragment" />
         <activity

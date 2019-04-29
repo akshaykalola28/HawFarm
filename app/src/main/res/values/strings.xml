@@ -29,4 +29,11 @@
     <string name="log_out">Log Out</string>
     <string name="send">SEND</string>
     <string name="hawkers_name">Hawkers Name</string>
+    <string name="order_details">ORDER DETAILS</string>
+    <string name="order_id">Order ID</string>
+    <string name="product_type">Product Type</string>
+    <string name="seller_name">Seller Name</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="product_name">Product Name</string>
+
 </resources>
