@@ -1,6 +1,5 @@
 package com.project.hawfarm;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;

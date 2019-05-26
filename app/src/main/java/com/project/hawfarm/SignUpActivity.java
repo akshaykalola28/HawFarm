@@ -1,7 +1,10 @@
 package com.project.hawfarm;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
     String name, email, pass, cpass, address, mobileString, pincodeString;
     int pincode, mobile;
 
-    String registerUrl = "http://akshaykalola.openode.io/user/register";
+    String registerUrl = ServerData.REGISTER_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,24 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            String data = jsonObject.getString("data");
+                            if (data.equals("ER_DUP_ENTRY")) {
+                                Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
+                                        "User Already Exists. Please try to LogIn", Snackbar.LENGTH_INDEFINITE)
+                                        .setAction("Log In", new View.OnClickListener() {
+                                            public void onClick(View v) {
+                                                startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
+                                            }
+                                        }).show();
+                            } else {
+                                Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
+                                        "Registration Successful " + data, Snackbar.LENGTH_INDEFINITE)
+                                        .setAction("Log In", new View.OnClickListener() {
+                                            public void onClick(View v) {
+                                                startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
+                                            }
+                                        }).show();
+                            }
                             Toast.makeText(SignUpActivity.this, jsonObject.getString("data"), Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -121,6 +142,8 @@ public class SignUpActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
+                                "Something is Wrong! Please try again.",Snackbar.LENGTH_INDEFINITE).show();
                         Toast.makeText(SignUpActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
@@ -133,7 +156,7 @@ public class SignUpActivity extends AppCompatActivity {
                 params.put("phone", mobileString);
                 params.put("password", pass);
                 //TODO: Change the user type
-                params.put("user_type", "seller");
+                params.put("user_type", "buyer");
                 params.put("address", address);
                 params.put("pincode", pincodeString);
                 return params;
