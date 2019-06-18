@@ -29,9 +29,6 @@ public class SignUpActivity extends AppCompatActivity {
     EditText nameField, emailField, passField, cpassField, mobileField, addressField, pincodeField;
     Button submitDataButton;
     String name, email, pass, cpass, address, mobileString, pincodeString;
-    int pincode, mobile;
-
-    String registerUrl = ServerData.REGISTER_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,15 +96,13 @@ public class SignUpActivity extends AppCompatActivity {
             pincodeField.setError("Enter Pincode");
             pincodeField.requestFocus();
         } else {
-            //mobile = Integer.parseInt(mobileString);
-            //pincode = Integer.parseInt(pincodeString);
             valid = true;
         }
         return valid;
     }
 
     private void submitData() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, registerUrl,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerData.REGISTER_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -141,7 +136,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
-                                "Something is Wrong! Please try again.",Snackbar.LENGTH_INDEFINITE).show();
+                                "Something is Wrong! Please try again.", Snackbar.LENGTH_SHORT).show();
                         Toast.makeText(SignUpActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }

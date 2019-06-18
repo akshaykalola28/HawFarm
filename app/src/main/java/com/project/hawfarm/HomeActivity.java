@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_demo) {
+        if (id == R.id.nav_home) {
             getFragmentManager().beginTransaction().replace(R.id.home_fragment,new ItemListFragment()).commit();
         } else if (id == R.id.nav_share){
 
