@@ -1,9 +1,9 @@
 package com.project.hawfarm;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,9 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView displayName, displayEmail;
+    String userDataString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +33,30 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
 
-        getFragmentManager().beginTransaction().replace(R.id.home_fragment,new HomeMainFragment()).commit();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+
+        displayName = headerView.findViewById(R.id.user_name);
+        displayEmail = headerView.findViewById(R.id.user_email);
+
+        userDataString = getIntent().getStringExtra("userData");
+        try {
+            JSONArray userDataJsonArray = new JSONArray(userDataString);
+            JSONObject userDataJson = new JSONObject(userDataJsonArray.getString(0).trim());
+
+            displayName.setText(userDataJson.getString("name"));
+            displayEmail.setText(userDataJson.getString("email"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        getFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
     }
 
     @Override
@@ -61,7 +86,7 @@ public class HomeActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_logout){
+        } else if (id == R.id.action_logout) {
             logOut();
         }
 
@@ -69,7 +94,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void logOut() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();
@@ -85,8 +110,8 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            getFragmentManager().beginTransaction().replace(R.id.home_fragment,new ItemListFragment()).commit();
-        } else if (id == R.id.nav_share){
+            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new ItemListFragment()).commit();
+        } else if (id == R.id.nav_share) {
 
         }
 

@@ -1,5 +1,6 @@
 package com.project.hawfarm;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ public class LogInActivity extends AppCompatActivity {
         bttn_login = (Button) findViewById(R.id.btn_login);
 
         // shared preferences
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         checkSharedPreferences();
 
         bttn_login.setOnClickListener(new View.OnClickListener() {
