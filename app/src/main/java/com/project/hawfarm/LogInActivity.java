@@ -34,6 +34,7 @@ public class LogInActivity extends AppCompatActivity {
     EditText emailField, passField;
     String email, pass;
     Button bttn_login;
+    SharedPreferences mPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,12 @@ public class LogInActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.input_email);
         passField = findViewById(R.id.input_password);
-
         bttn_login = (Button) findViewById(R.id.btn_login);
+
+        // shared preferences
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        checkSharedPreferences();
+
         bttn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,8 +118,9 @@ public class LogInActivity extends AppCompatActivity {
                             if (success.equals("true")) {
                                 String data = jsonObject.getString("data");
                                 Log.d(TAG, "data: " + data);
-                                Intent intent;
-                                intent = new Intent(LogInActivity.this, HomeActivity.class);
+
+                                savePreferences(data);
+                                Intent intent = new Intent(LogInActivity.this, HomeActivity.class);
                                 intent.putExtra("userData", data);
                                 startActivity(intent);
                                 finish();
@@ -146,4 +152,20 @@ public class LogInActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    private void savePreferences(String data) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString("userDataStringKey", data);
+        editor.apply();
+    }
+
+    private void checkSharedPreferences() {
+
+        if (mPreferences.contains("userDataStringKey")){
+            String userDataString = mPreferences.getString("userDataStringKey", "");
+            Intent intent = new Intent(LogInActivity.this, HomeActivity.class);
+            intent.putExtra("userData",userDataString);
+            startActivity(intent);
+            finish();
+        }
+    }
 }

@@ -1,6 +1,9 @@
 package com.project.hawfarm;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -58,9 +61,21 @@ public class HomeActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_logout){
+            logOut();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logOut() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
+
+        startActivity(new Intent(HomeActivity.this, LogInActivity.class));
+        finish();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
