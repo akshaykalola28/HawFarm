@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new ItemListFragment()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
         } else if (id == R.id.nav_share) {
 
         }
