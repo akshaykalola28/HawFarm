@@ -111,7 +111,11 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             getFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
-        } else if (id == R.id.nav_share) {
+        }
+        if (id == R.id.nav_order_history){
+            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new OrderHistoryFragment()).commit();
+        }
+        else if (id == R.id.nav_share) {
 
         }
 
