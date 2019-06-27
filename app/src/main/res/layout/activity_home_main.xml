@@ -39,5 +39,4 @@
         android:layout_below="@id/main_slider"
         android:layout_marginTop="10dp" />
 
-
 </RelativeLayout>

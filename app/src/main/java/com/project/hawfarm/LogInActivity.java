@@ -137,6 +137,7 @@ public class LogInActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
                 Toast.makeText(LogInActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         }) {

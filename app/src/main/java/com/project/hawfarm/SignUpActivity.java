@@ -149,7 +149,7 @@ public class SignUpActivity extends AppCompatActivity {
                 params.put("phone", mobileString);
                 params.put("password", pass);
                 //TODO: Change the user type
-                params.put("user_type", "buyer");
+                params.put("user_type", "customer");
                 params.put("address", address);
                 params.put("pincode", pincodeString);
                 return params;
