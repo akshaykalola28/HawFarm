@@ -36,7 +36,7 @@
                 android:layout_marginEnd="33dp"
                 android:layout_toRightOf="@id/imageset"
                 android:orientation="vertical"
-                android:paddingLeft="5dp">
+                android:paddingLeft="10dp">
 
                 <TextView
                     android:id="@+id/text_seller_name"
@@ -49,6 +49,9 @@
                     android:id="@+id/text_veg_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:text="Vegetable Name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -58,8 +61,8 @@
                     android:layout_height="wrap_content"
                     android:background="#F0B70B"
                     android:padding="2dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:text="2.5"/>
+                    android:text="2.5"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <TextView
                     android:id="@+id/text_desc"

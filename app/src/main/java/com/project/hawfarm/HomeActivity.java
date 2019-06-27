@@ -116,7 +116,7 @@ public class HomeActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.home_fragment, new OrderHistoryFragment()).commit();
         }
         else if (id == R.id.nav_share) {
-
+            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new ItemListFragment()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
