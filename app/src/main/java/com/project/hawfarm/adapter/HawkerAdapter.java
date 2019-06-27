@@ -1,8 +1,9 @@
-package com.project.hawfarm;
+package com.project.hawfarm.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.project.hawfarm.R;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +38,9 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, currentStockList.get(i).toString(), Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(context,SignUpActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);*/
             }
         });
         return new HawkerViewHolder(view);
@@ -42,10 +49,18 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
     @Override
     public void onBindViewHolder(@NonNull HawkerViewHolder hawkerViewHolder, int i) {
         JSONObject currentStock = currentStockList.get(i);
-
+        String allVegName = "";
         try {
-            hawkerViewHolder.textVegName.setText(currentStock.getString("veg_name"));
-            hawkerViewHolder.textSellerName.setText(currentStock.getString("user_id"));
+            JSONArray productArray = currentStock.getJSONArray("product");
+
+            for (int n = 0; n < productArray.length(); n++) {
+                JSONObject productJson = productArray.getJSONObject(n);
+                allVegName = productJson.getString("veg_name") + ", " + allVegName;
+
+            }
+            Log.d("HAWKERADAPTER", allVegName);
+            hawkerViewHolder.textVegName.setText(allVegName);
+            hawkerViewHolder.textSellerName.setText(currentStock.getString("name"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

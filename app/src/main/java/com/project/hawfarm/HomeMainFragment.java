@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.project.hawfarm.adapter.HawkerAdapter;
+import com.project.hawfarm.adapter.SliderAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,7 +41,7 @@ public class HomeMainFragment extends Fragment {
         mainView = inflater.inflate(R.layout.activity_home_main, container, false);
 
         ViewPager mViewPager = (ViewPager) mainView.findViewById(R.id.viewPage);
-        Slider adapterView = new Slider(getActivity().getApplicationContext());
+        SliderAdapter adapterView = new SliderAdapter(getActivity().getApplicationContext());
         mViewPager.setAdapter(adapterView);
 
         RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.myRecyclerView);
@@ -74,8 +77,11 @@ public class HomeMainFragment extends Fragment {
                                 for (int i = 0; i < dataArray.length(); i++) {
                                     JSONObject stockInfo = dataArray.getJSONObject(i);
                                     currentStockList.add(stockInfo);
-                                    Log.d("stockInfo",i+ ": " + stockInfo.toString());
+                                    Log.d("stockInfo", i + ": " + stockInfo.toString());
                                 }
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Something is wrong ! Please, Try Again...", Toast.LENGTH_SHORT).show();
                             }
                             mAdapter.notifyDataSetChanged();
                         } catch (Exception e) {
@@ -85,7 +91,8 @@ public class HomeMainFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getActivity().getApplicationContext(),
+                        "Something is wrong ! Please, Try Again...", Toast.LENGTH_SHORT).show();
             }
         });
 
