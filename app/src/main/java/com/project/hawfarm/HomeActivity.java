@@ -112,7 +112,7 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             getFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
         } else if (id == R.id.nav_share) {
-
+            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new ItemListFragment()).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -55,8 +55,11 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
 
             for (int n = 0; n < productArray.length(); n++) {
                 JSONObject productJson = productArray.getJSONObject(n);
-                allVegName = productJson.getString("veg_name") + ", " + allVegName;
-
+                if (n == 0) {
+                    allVegName = productJson.getString("veg_name");
+                } else {
+                    allVegName = productJson.getString("veg_name") + ", " + allVegName;
+                }
             }
             Log.d("HAWKERADAPTER", allVegName);
             hawkerViewHolder.textVegName.setText(allVegName);
