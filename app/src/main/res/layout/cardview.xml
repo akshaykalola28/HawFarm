@@ -33,11 +33,10 @@
                 android:id="@+id/Linearfortext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_marginEnd="33dp"
                 android:layout_toRightOf="@id/imageset"
                 android:orientation="vertical"
-                android:paddingLeft="5dp">
+                android:paddingLeft="4dp"
+                >
 
                 <TextView
                     android:id="@+id/seller"
