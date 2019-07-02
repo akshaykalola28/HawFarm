@@ -26,8 +26,7 @@
                 android:id="@+id/order_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/order_no_cardview"
-                android:text="adgdfgsdghfgfhf" />
+                android:layout_toRightOf="@id/order_no_cardview" />
 
             <View
                 android:id="@+id/oreder_view"
@@ -51,8 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/oreder_view"
-                android:layout_toRightOf="@id/product_name_cardview"
-                android:text="adgdfgsdghfgfhf" />
+                android:layout_toRightOf="@id/product_name_cardview" />
 
             <View
                 android:id="@+id/product_name_view"
@@ -75,8 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_name_view"
-                android:layout_toRightOf="@id/Quntity_cardview"
-                android:text="adgdfgsdghfgfhf" />
+                android:layout_toRightOf="@id/Quntity_cardview" />
 
             <View
                 android:id="@+id/Quntity_view"
@@ -99,8 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Quntity_view"
-                android:layout_toRightOf="@id/seller_name_cardview"
-                android:text="adgdfgsdghfgfhf" />
+                android:layout_toRightOf="@id/seller_name_cardview" />
 
             <View
                 android:id="@+id/seller_name_view"
@@ -123,8 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/seller_name_view"
-                android:layout_toRightOf="@id/delivery_address_cardview"
-                android:text="adgdfgsdghfgfhf" />
+                android:layout_toRightOf="@id/delivery_address_cardview" />
 
             <View
                 android:id="@+id/delivery_address_view"
@@ -147,8 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/delivery_address_view"
-                android:layout_toRightOf="@id/status_cardview"
-                android:text="adgdfgsdghfgfhf" />
+                android:layout_toRightOf="@id/status_cardview" />
 
             <View
                 android:id="@+id/status_view"
