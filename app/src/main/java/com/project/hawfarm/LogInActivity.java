@@ -94,7 +94,6 @@ public class LogInActivity extends AppCompatActivity {
         email = emailField.getText().toString().trim();
         pass = passField.getText().toString().trim();
 
-
         if (email.isEmpty()) {
             emailField.setError("Enter E-mail");
             emailField.requestFocus();
@@ -162,10 +161,10 @@ public class LogInActivity extends AppCompatActivity {
 
     private void checkSharedPreferences() {
 
-        if (mPreferences.contains("userDataStringKey")){
+        if (mPreferences.contains("userDataStringKey")) {
             String userDataString = mPreferences.getString("userDataStringKey", "");
             Intent intent = new Intent(LogInActivity.this, HomeActivity.class);
-            intent.putExtra("userData",userDataString);
+            intent.putExtra("userData", userDataString);
             startActivity(intent);
             finish();
         }
