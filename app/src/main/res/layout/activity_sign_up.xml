@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_margin="50dp"
+       android:layout_margin="45dp"
         app:cardCornerRadius="5dp"
         app:contentPadding="10dp">
 
@@ -160,5 +160,5 @@
         android:gravity="center"
         android:text="@string/already_a_member_login"
         android:textColor="@color/Dark"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 </RelativeLayout>
