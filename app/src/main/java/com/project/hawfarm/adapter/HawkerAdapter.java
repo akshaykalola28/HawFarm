@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.project.hawfarm.HomeActivity;
+import com.project.hawfarm.ItemListFragment;
 import com.project.hawfarm.R;
 
 import org.json.JSONArray;
@@ -34,21 +36,22 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
     public HawkerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.seller_cardview, viewGroup, false);
 
-        view.setOnClickListener(new View.OnClickListener() {
+        /*view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, currentStockList.get(i).toString(), Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(context,SignUpActivity.class);
+                *//*Intent intent = new Intent(context,SignUpActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);*/
+                context.startActivity(intent);*//*
             }
-        });
+        });*/
         return new HawkerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HawkerViewHolder hawkerViewHolder, int i) {
         JSONObject currentStock = currentStockList.get(i);
+        hawkerViewHolder.setData(currentStock, i);
         String allVegName = "";
         try {
             JSONArray productArray = currentStock.getJSONArray("product");
@@ -76,6 +79,9 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
 
     public class HawkerViewHolder extends RecyclerView.ViewHolder {
 
+        JSONObject currentItem = null;
+        int pos = 0;
+
         TextView textSellerName, textVegName, textDescription;
         ImageView sellerImageView;
 
@@ -86,6 +92,30 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
             textVegName = itemView.findViewById(R.id.text_veg_name);
             textDescription = itemView.findViewById(R.id.text_desc);
             sellerImageView = itemView.findViewById(R.id.seller_imageview);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, currentItem.toString(), Toast.LENGTH_SHORT).show();
+                    //onItemClickListener.onItemClick(view, getAdapterPosition());
+                    //AppCompatActivity activity = (AppCompatActivity) context;
+                    //Fragment fragment = new ItemListFragment();
+                    //HomeActivity homeActivity = new HomeActivity();
+                    //homeActivity.getFragmentManager().beginTransaction().replace(R.id.home_fragment, fragment).addToBackStack(null).commit();
+                    /*Fragment itemFragment = new ItemListFragment();
+                    Bundle bundle = new Bundle();
+
+                    HomeActivity activity = (HomeActivity) context;
+                    activity.switchContent(R.id.home_fragment, itemFragment);*/
+                    HomeActivity homeActivity = new HomeActivity();
+                    homeActivity.switchContent(R.id.home_fragment, new ItemListFragment());
+                }
+            });
+        }
+
+        void setData(JSONObject currentItem, int pos) {
+            this.currentItem = currentItem;
+            this.pos = pos;
         }
     }
 }

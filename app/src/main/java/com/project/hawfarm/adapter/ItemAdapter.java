@@ -10,9 +10,20 @@ import android.widget.TextView;
 
 import com.project.hawfarm.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private Context context;
+    private List<JSONObject> itemsList;
+
+    ItemAdapter(Context context, List<JSONObject> itemsList) {
+        this.context = context;
+        this.itemsList = itemsList;
+    }
 
     @NonNull
     @Override
@@ -24,7 +35,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
+        JSONObject item = itemsList.get(i);
 
+        try {
+            itemViewHolder.itemName.setText(item.getString("veg_name"));
+            itemViewHolder.itemType.setText(item.getString("stock_id")); //TODO: Change it later
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -34,14 +52,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, itemType, price, discription;
+        TextView itemName, itemType, price, description;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemName = itemView.findViewById(R.id.item_name);
             price = itemView.findViewById(R.id.item_price);
-            discription = itemView.findViewById(R.id.item_dicription);
+            description = itemView.findViewById(R.id.item_description);
         }
 
     }

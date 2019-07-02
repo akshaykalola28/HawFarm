@@ -1,5 +1,7 @@
 package com.project.hawfarm;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +30,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -122,5 +125,19 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void switchContent(int id, Fragment fragment) {
+
+
+        if (!isFinishing() && !isDestroyed()) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(id, fragment, fragment.toString());
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+
+
     }
 }
