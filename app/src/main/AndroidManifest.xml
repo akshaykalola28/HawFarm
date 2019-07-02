@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".OrderHistoryFragment"></activity>
         <activity android:name=".OrderDetails" />
         <activity android:name=".ForgotPassword" />
         <activity

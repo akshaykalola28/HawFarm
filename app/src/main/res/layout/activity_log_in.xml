@@ -29,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <!--center horizontal gravity-->
 
@@ -64,17 +64,6 @@
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/forgot_pass"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:text="@string/forgot_password"
-            android:textColor="@color/colorPrimary"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textAlignment="textEnd"
-            tools:ignore="RtlCompat" />
 
         <Button
             android:id="@+id/btn_login"
@@ -86,6 +75,17 @@
             android:text="@string/login"
             android:background="@drawable/button_style"
             />
+
+        <TextView
+            android:id="@+id/forgot_pass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="@string/forgot_password"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            tools:ignore="RtlCompat" />
 
 
     </LinearLayout>
@@ -99,6 +99,6 @@
         android:gravity="center"
         android:textColor="@color/Dark"
         android:text="@string/no_account_yet_create_one"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
 </RelativeLayout>
