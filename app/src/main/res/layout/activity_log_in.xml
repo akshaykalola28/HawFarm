@@ -73,8 +73,7 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="@string/login"
-            android:background="@drawable/button_style"
-            />
+            android:background="@drawable/button_style"/>
 
         <TextView
             android:id="@+id/forgot_pass"
