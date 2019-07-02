@@ -20,7 +20,7 @@
             android:layout_height="80dp"
             android:gravity="center_horizontal"
             android:text="@string/order_details"
-            android:textSize="30sp" /> <!--center horizontal gravity-->
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" /> <!--center horizontal gravity-->
 
         <!-- Email Label -->
         <TextView
