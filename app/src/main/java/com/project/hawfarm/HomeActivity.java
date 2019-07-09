@@ -1,7 +1,5 @@
 package com.project.hawfarm;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -59,7 +57,7 @@ public class HomeActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        getFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
     }
 
     @Override
@@ -113,31 +111,15 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment, new HomeMainFragment()).commit();
         }
-        if (id == R.id.nav_order_history){
-            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new OrderHistoryFragment()).commit();
-        }
-        else if (id == R.id.nav_share) {
-            getFragmentManager().beginTransaction().replace(R.id.home_fragment, new ItemListFragment()).commit();
+        if (id == R.id.nav_order_history) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment, new OrderHistoryFragment()).commit();
+        } else if (id == R.id.nav_share) {
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-    public void switchContent(int id, Fragment fragment) {
-
-
-        if (!isFinishing() && !isDestroyed()) {
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(id, fragment, fragment.toString());
-            ft.addToBackStack(null);
-            ft.commit();
-        }
-
-
     }
 }

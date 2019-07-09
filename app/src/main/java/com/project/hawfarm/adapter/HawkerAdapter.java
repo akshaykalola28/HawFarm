@@ -1,17 +1,16 @@
 package com.project.hawfarm.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.project.hawfarm.HomeActivity;
 import com.project.hawfarm.ItemListFragment;
 import com.project.hawfarm.R;
 
@@ -25,10 +24,12 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
 
     private Context context;
     private List<JSONObject> currentStockList;
+    private Fragment fragment;
 
-    public HawkerAdapter(Context context, List<JSONObject> currentStockList) {
+    public HawkerAdapter(Context context, List<JSONObject> currentStockList, Fragment fragment) {
         this.context = context;
         this.currentStockList = currentStockList;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -36,15 +37,6 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
     public HawkerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.seller_cardview, viewGroup, false);
 
-        /*view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, currentStockList.get(i).toString(), Toast.LENGTH_SHORT).show();
-                *//*Intent intent = new Intent(context,SignUpActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);*//*
-            }
-        });*/
         return new HawkerViewHolder(view);
     }
 
@@ -64,7 +56,6 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
                     allVegName = productJson.getString("veg_name") + ", " + allVegName;
                 }
             }
-            Log.d("HAWKERADAPTER", allVegName);
             hawkerViewHolder.textVegName.setText(allVegName);
             hawkerViewHolder.textSellerName.setText(currentStock.getString("name"));
         } catch (JSONException e) {
@@ -96,19 +87,15 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, currentItem.toString(), Toast.LENGTH_SHORT).show();
-                    //onItemClickListener.onItemClick(view, getAdapterPosition());
-                    //AppCompatActivity activity = (AppCompatActivity) context;
-                    //Fragment fragment = new ItemListFragment();
-                    //HomeActivity homeActivity = new HomeActivity();
-                    //homeActivity.getFragmentManager().beginTransaction().replace(R.id.home_fragment, fragment).addToBackStack(null).commit();
-                    /*Fragment itemFragment = new ItemListFragment();
-                    Bundle bundle = new Bundle();
+                    //Toast.makeText(context, currentItem.toString(), Toast.LENGTH_SHORT).show();
 
-                    HomeActivity activity = (HomeActivity) context;
-                    activity.switchContent(R.id.home_fragment, itemFragment);*/
-                    HomeActivity homeActivity = new HomeActivity();
-                    homeActivity.switchContent(R.id.home_fragment, new ItemListFragment());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("hawkerData", currentItem.toString());
+                    ItemListFragment itemListFragment = new ItemListFragment();
+                    itemListFragment.setArguments(bundle);
+
+                    fragment.getFragmentManager().beginTransaction().replace(R.id.home_fragment,
+                            itemListFragment).addToBackStack(null).commit();
                 }
             });
         }

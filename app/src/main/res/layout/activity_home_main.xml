@@ -14,6 +14,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/boxroundshape"
         android:drawableStart="@drawable/ic_location_on_black"
+        android:focusable="false"
         android:hint="Add Location"
         android:paddingStart="10dp" />
 
