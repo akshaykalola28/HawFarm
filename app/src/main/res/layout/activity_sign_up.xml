@@ -16,13 +16,18 @@
         android:textSize="30sp" /> <!--center horizontal gravity-->
 
     <android.support.v7.widget.CardView
+        android:id="@+id/sign_up_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
        android:layout_margin="45dp"
         app:cardCornerRadius="5dp"
-        app:contentPadding="10dp">
+        app:contentPadding="10dp"
+        android:stateListAnimator="@anim/touchanim"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        tools:targetApi="lollipop">
 
         <ScrollView
             android:layout_width="match_parent"

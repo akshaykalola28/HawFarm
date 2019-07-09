@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,6 +44,7 @@ public class LogInActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
 
         //for selecting language (only for once)
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -87,6 +91,23 @@ public class LogInActivity extends AppCompatActivity {
                 startActivity(new Intent(LogInActivity.this, SignUpActivity.class));
             }
         });
+
+        setAnimations();
+    }
+
+    private void setAnimations()
+    {
+        CardView loginCardview = findViewById(R.id.login_CardView);
+        Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
+        loginCardview.setAnimation(fromBottom);
+
+        signUpField.setAnimation(fromBottom);
+
+        TextView logo=findViewById(R.id.simpleTextView);
+        Animation fromtop=AnimationUtils.loadAnimation(this,R.anim.fromtop);
+        logo.setAnimation(fromtop);
+
+
     }
 
     private boolean getValidData() {

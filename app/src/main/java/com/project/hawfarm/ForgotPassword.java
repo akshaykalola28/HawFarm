@@ -2,9 +2,13 @@ package com.project.hawfarm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -27,5 +31,17 @@ public class ForgotPassword extends AppCompatActivity {
 
             }
         });
+        setAnimations();
+    }
+
+    private void setAnimations()
+    {
+        CardView forgotPassCardview = findViewById(R.id.forgot_pass_cardview);
+        Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
+        forgotPassCardview.setAnimation(fromBottom);
+
+        TextView logo=findViewById(R.id.simpleTextView);
+        Animation fromtop=AnimationUtils.loadAnimation(this,R.anim.fromtop);
+        logo.setAnimation(fromtop);
     }
 }

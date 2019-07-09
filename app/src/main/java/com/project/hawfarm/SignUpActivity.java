@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,6 +38,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
+
         nameField = findViewById(R.id.input_name);
         emailField = findViewById(R.id.input_email);
         passField = findViewById(R.id.input_password);
@@ -62,6 +67,17 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+        setAnimations();
+    }
+
+    private void setAnimations() {
+        CardView SignuoCardview = findViewById(R.id.sign_up_cardview);
+        Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
+        SignuoCardview.setAnimation(fromBottom);
+
+        TextView logo=findViewById(R.id.simpleTextView);
+        Animation fromtop=AnimationUtils.loadAnimation(this,R.anim.fromtop);
+        logo.setAnimation(fromtop);
     }
 
     private boolean getValidData() {
