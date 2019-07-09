@@ -4,12 +4,22 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.project.hawfarm.adapter.ItemAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemListFragment extends Fragment {
 
@@ -17,6 +27,10 @@ public class ItemListFragment extends Fragment {
     TextView textHawkerName, textHawkerAddress;
 
     JSONObject hawkerData;
+    JSONArray productArray;
+    List<JSONObject> productList;
+
+    ItemAdapter itemAdapter;
 
     @Nullable
     @Override
@@ -27,14 +41,38 @@ public class ItemListFragment extends Fragment {
             String hawkerDataString = getArguments().getString("hawkerData");
 
             hawkerData = new JSONObject(hawkerDataString);
+            productArray = hawkerData.getJSONArray("product");
 
+            Log.i("PRINT", productArray.toString());
             setDetails();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        setRecyclerView();
 
         return mainView;
+    }
+
+    private void setRecyclerView() {
+        RecyclerView recyclerView = mainView.findViewById(R.id.item_recycleview);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        productList = new ArrayList<>();
+        itemAdapter = new ItemAdapter(getActivity().getApplicationContext(), productList, this);
+        recyclerView.setAdapter(itemAdapter);
+
+        for (int i = 0; i < productArray.length(); i++) {
+            try {
+                productList.add(productArray.getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            itemAdapter.notifyDataSetChanged();
+        }
     }
 
     private void setDetails() {
@@ -43,7 +81,7 @@ public class ItemListFragment extends Fragment {
 
         try {
             textHawkerName.setText(hawkerData.getString("name"));
-            textHawkerAddress.setText(hawkerData.getString("address"));
+            //textHawkerAddress.setText(hawkerData.getString("address"));
         } catch (Exception e) {
             e.printStackTrace();
         }
