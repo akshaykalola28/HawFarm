@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,17 +96,16 @@ public class LogInActivity extends AppCompatActivity {
         setAnimations();
     }
 
-    private void setAnimations()
-    {
+    private void setAnimations() {
         CardView loginCardview = findViewById(R.id.login_CardView);
         Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         loginCardview.setAnimation(fromBottom);
 
         signUpField.setAnimation(fromBottom);
 
-        TextView logo=findViewById(R.id.simpleTextView);
-        Animation fromtop=AnimationUtils.loadAnimation(this,R.anim.fromtop);
-        logo.setAnimation(fromtop);
+        ImageView logoImageView = findViewById(R.id.company_logo);
+        Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
+        logoImageView.setAnimation(fromtop);
 
 
     }
