@@ -32,8 +32,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.view.View;
-
 public class LogInActivity extends AppCompatActivity {
     private static final String TAG = "LogInActivity";
 
@@ -106,9 +104,9 @@ public class LogInActivity extends AppCompatActivity {
 
         signUpField.setAnimation(fromBottom);
 
-        /*ImageView logoImageView = findViewById(R.id.company_logo);
+        ImageView logoImageView = findViewById(R.id.company_logo);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
-        logoImageView.setAnimation(fromtop);*/
+        logoImageView.setAnimation(fromtop);
 
 
     }
