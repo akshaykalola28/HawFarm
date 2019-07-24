@@ -36,6 +36,12 @@
     <string name="seller_name">Seller Name</string>
     <string name="delivery_address">Delivery Address</string>
     <string name="product_name">Product Name</string>
+    <string name="country_prompt">country_prompt</string>
     <string name="item_total">Item Total</string>
 
+    <string-array name="country_arrays">
+        <item>250gm</item>
+        <item>500gm</item>
+        <item>1 Killo</item>
+    </string-array>
 </resources>

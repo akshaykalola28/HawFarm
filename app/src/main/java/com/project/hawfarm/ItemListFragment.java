@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class ItemListFragment extends Fragment {
     List<JSONObject> productList;
 
     ItemAdapter itemAdapter;
+    List<JSONObject> cartItemList;
 
     @Nullable
     @Override
@@ -49,7 +51,20 @@ public class ItemListFragment extends Fragment {
             e.printStackTrace();
         }
 
+        cartItemList = new ArrayList<>();
         setRecyclerView();
+
+        mainView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    Log.d("KEY","PRESSED");
+                }
+                return false;
+            }
+        });
 
         return mainView;
     }
@@ -85,5 +100,14 @@ public class ItemListFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void addItemList(JSONObject itemData) {
+        cartItemList.add(itemData);
+        Log.d("CARTITEMLIST", cartItemList.toString());
+    }
+
+    public boolean onBackPressed() {
+        return false;
     }
 }

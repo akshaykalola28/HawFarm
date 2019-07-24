@@ -1,6 +1,7 @@
 package com.project.hawfarm.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -39,7 +40,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
-        JSONObject item = itemsList.get(i);
+        final JSONObject item = itemsList.get(i);
 
         try {
             itemViewHolder.itemName.setText(item.getString("veg_name"));
@@ -51,8 +52,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         itemViewHolder.itemAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("itemData", item.toString());
+
                 FragmentTransaction fragmentTransaction = fragment.getFragmentManager().beginTransaction().addToBackStack(null);
                 DialogFragment dialog = new AddItemDialog();
+                dialog.setArguments(bundle);
+                dialog.setTargetFragment(fragment, 0);
                 dialog.show(fragmentTransaction, "addItemDialog");
             }
         });

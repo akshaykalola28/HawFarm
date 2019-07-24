@@ -46,45 +46,18 @@
                 android:layout_below="@+id/cart_text_address"
                 android:background="@color/lightDark" />
 
-            <TextView
-                android:id="@+id/cart_text_iteam_name"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_view1"
-                android:text="Item Name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:id="@+id/recycleview_cart"
+                android:layout_below="@+id/cart_view1">
 
-            <TextView
-                android:id="@+id/cart_text_item_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_text_iteam_name"
-                android:text="Price"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <TextView
-                android:id="@+id/cart_text_item_discription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_text_item_price"
-                android:text="Discription"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cart_view1"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_style"
-                android:gravity="center"
-                android:text="Add  +" />
-
+            </android.support.v7.widget.RecyclerView>
             <View
                 android:id="@+id/cart_view2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@+id/cart_text_item_discription"
+                android:layout_below="@+id/recycleview_cart"
                 android:background="@color/lightDark" />
 
             <TextView
