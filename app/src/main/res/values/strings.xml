@@ -36,5 +36,6 @@
     <string name="seller_name">Seller Name</string>
     <string name="delivery_address">Delivery Address</string>
     <string name="product_name">Product Name</string>
+    <string name="item_total">Item Total</string>
 
 </resources>
