@@ -1,43 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
     tools:context=".HomeMainFragment">
 
-    <EditText
-        android:id="@+id/location_bar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/boxroundshape"
-        android:drawableStart="@drawable/ic_location_on_black"
-        android:focusable="false"
-        android:hint="Add Location"
-        android:paddingStart="10dp" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/main_slider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/location_bar"
-        android:layout_marginTop="10dp">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPage"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80pt"
-            android:background="@drawable/boxroundshape" />
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/location_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/boxroundshape"
+                android:drawableStart="@drawable/ic_location_on_black"
+                android:focusable="false"
+                android:hint="Add Location"
+                android:paddingStart="10dp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/myRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/main_slider"
-        android:layout_marginTop="10dp" />
+            <LinearLayout
+                android:id="@+id/main_slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/location_bar"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-</RelativeLayout>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="80pt"
+                    android:background="@drawable/boxroundshape" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/myRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_slider"
+                android:layout_marginTop="10dp" />
+
+            <ProgressBar
+                android:id="@+id/recyclerview_progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/main_slider"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="40dp" />
+        </RelativeLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

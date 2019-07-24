@@ -5,12 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,10 +37,14 @@ public class HomeMainFragment extends Fragment {
     HawkerAdapter mAdapter;
     List<JSONObject> currentStockList;
 
+    ProgressBar listLoading;
+    SwipeRefreshLayout homeRefreshLayout;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.activity_home_main, container, false);
+
 
         ViewPager mViewPager = (ViewPager) mainView.findViewById(R.id.viewPage);
         SliderAdapter adapterView = new SliderAdapter(getActivity().getApplicationContext());
@@ -59,12 +65,26 @@ public class HomeMainFragment extends Fragment {
         mAdapter = new HawkerAdapter(getActivity().getApplicationContext(), currentStockList, this);
         recyclerView.setAdapter(mAdapter);
 
+
+        listLoading = mainView.findViewById(R.id.recyclerview_progressbar);
+        listLoading.setVisibility(View.VISIBLE);
+
+        homeRefreshLayout = mainView.findViewById(R.id.home_refresh_layout);
+        homeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchCurrentAllStock();
+            }
+        });
+
         fetchCurrentAllStock();
 
         return mainView;
     }
 
     private void fetchCurrentAllStock() {
+        listLoading.setVisibility(View.VISIBLE);
+        currentStockList.clear();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerData.ALL_STOCK_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -79,9 +99,13 @@ public class HomeMainFragment extends Fragment {
                                     currentStockList.add(stockInfo);
                                     Log.d("stockInfo", i + ": " + stockInfo.toString());
                                 }
+                                listLoading.setVisibility(View.GONE);
+                                homeRefreshLayout.setRefreshing(false);
                             } else {
                                 Toast.makeText(getActivity().getApplicationContext(),
                                         "Something is wrong ! Please, Try Again...", Toast.LENGTH_SHORT).show();
+                                listLoading.setVisibility(View.GONE);
+                                homeRefreshLayout.setRefreshing(false);
                             }
                             mAdapter.notifyDataSetChanged();
                         } catch (Exception e) {
@@ -93,6 +117,9 @@ public class HomeMainFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Something is wrong ! Please, Try Again...", Toast.LENGTH_SHORT).show();
+                mAdapter.notifyDataSetChanged();
+                listLoading.setVisibility(View.GONE);
+                homeRefreshLayout.setRefreshing(false);
             }
         });
 
