@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Splash_Screen">
+    tools:context=".SplashScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/hawfarm_nameplate_1"
-            android:layout_centerInParent="true"/>
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
 </RelativeLayout>

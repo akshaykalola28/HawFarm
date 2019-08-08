@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Splash_Screen">
+        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,9 +45,7 @@
         <activity
             android:name=".LogInActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreenTheme">
-
-        </activity>
+            android:theme="@style/AppTheme.FullScreenTheme"></activity>
         <activity android:name=".SelectLangActivity" />
     </application>
 

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/profil_background"
+    tools:context=".UserProfile">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="80pt"
+        android:layout_height="80pt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60pt"
+        android:background="@drawable/round_shape" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_image"
+        app:cardCornerRadius="5dp"
+        app:contentPadding="10dp"
+        android:layout_margin="20sp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- User name-->
+            <TextView
+                android:id="@+id/Pro_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/Profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Pro_name"
+                android:layout_marginLeft="15dp"
+                android:text="Meet kakadiya"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <view
+                android:id="@+id/view_pro1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/Profile_name"
+                android:layout_marginTop="5sp" />
+            <!--End User Name-->
+
+            <!-- User Mail-->
+            <TextView
+                android:id="@+id/Pro_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pro1"
+                android:text="Email"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/Profile_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Pro_mail"
+                android:layout_marginLeft="15dp"
+                android:text="Change your email"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <view
+                android:id="@+id/view_pro2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/Profile_mail"
+                android:layout_marginTop="5sp" />
+            <!-- End User Mail-->
+
+            <!-- Mobile Number-->
+            <TextView
+                android:id="@+id/Pro_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pro2"
+                android:text="Mobile No"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/Profile_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Pro_mobile"
+                android:layout_marginLeft="15dp"
+                android:text="Chnage Mobile Number"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <view
+                android:id="@+id/view_pro3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/Profile_mobile"
+                android:layout_marginTop="5sp" />
+            <!-- End Mobile Number-->
+
+            <!-- Password-->
+            <TextView
+                android:id="@+id/Pro_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pro3"
+                android:text="Password"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/Profile_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Pro_pass"
+                android:layout_marginLeft="15dp"
+                android:text="Chnage Your Password"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <view
+                android:id="@+id/view_pro4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/Profile_pass"/>
+            <!-- End Password-->
+
+            <!-- Address-->
+            <TextView
+                android:id="@+id/Pro_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pro4"
+                android:text="Address"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/Profile_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Pro_address"
+                android:layout_marginLeft="15dp"
+                android:text="Chnage Your Address"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <view
+                android:id="@+id/view_pro5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/Profile_address"/>
+
+            <!-- End Address-->
+
+            <!-- Button -->
+            <Button
+                android:id="@+id/save_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pro5"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_style"
+                android:text="Save"
+                android:textAllCaps="true"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
