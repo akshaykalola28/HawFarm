@@ -1,8 +1,10 @@
 package com.project.hawfarm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
@@ -32,20 +34,21 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 public class LogInActivity extends AppCompatActivity {
     private static final String TAG = "LogInActivity";
 
     TextView forgotPasswordField, signUpField;
     EditText emailField, passField;
     String email, pass;
-    Button bttn_login;
+    Button btn_login;
     SharedPreferences mPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-
 
         //for selecting language (only for once)
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -61,13 +64,13 @@ public class LogInActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.input_email);
         passField = findViewById(R.id.input_password);
-        bttn_login = (Button) findViewById(R.id.btn_login);
+        btn_login = (Button) findViewById(R.id.btn_login);
 
         // shared preferences
         mPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         checkSharedPreferences();
 
-        bttn_login.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getValidData()) {
@@ -94,7 +97,9 @@ public class LogInActivity extends AppCompatActivity {
         });
 
         setAnimations();
+
     }
+
 
     private void setAnimations()
     {

@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,9 +76,9 @@ public class SignUpActivity extends AppCompatActivity {
         Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         SignuoCardview.setAnimation(fromBottom);
 
-        TextView logo=findViewById(R.id.simpleTextView);
+        ImageView logoImageView = findViewById(R.id.company_logo);
         Animation fromtop=AnimationUtils.loadAnimation(this,R.anim.fromtop);
-        logo.setAnimation(fromtop);
+        logoImageView.setAnimation(fromtop);
     }
 
     private boolean getValidData() {
