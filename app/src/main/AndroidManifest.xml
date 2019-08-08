@@ -16,19 +16,25 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".CartViewActivity"
-            android:label="Cart"/>
-        <activity android:name=".OrderDetails" />
-        <activity android:name=".ForgotPassword" />
+            android:label="Cart"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OrderDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ForgotPassword"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LogInActivity"
-            android:theme="@style/AppTheme.FullScreenTheme">
+            android:theme="@style/AppTheme.FullScreenTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
