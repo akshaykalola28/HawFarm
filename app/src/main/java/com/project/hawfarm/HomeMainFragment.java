@@ -47,7 +47,7 @@ public class HomeMainFragment extends Fragment {
 
 
         ViewPager mViewPager = (ViewPager) mainView.findViewById(R.id.viewPage);
-        SliderAdapter adapterView = new SliderAdapter(getActivity().getApplicationContext());
+        SliderAdapter adapterView = new SliderAdapter(getContext());
         mViewPager.setAdapter(adapterView);
 
         RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.myRecyclerView);
@@ -57,14 +57,14 @@ public class HomeMainFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
 
         // specify an adapter
         currentStockList = new ArrayList<>();
-        mAdapter = new HawkerAdapter(getActivity().getApplicationContext(), currentStockList, this);
+        mAdapter = new HawkerAdapter(getContext(), currentStockList, this);
         recyclerView.setAdapter(mAdapter);
-
 
         listLoading = mainView.findViewById(R.id.recyclerview_progressbar);
         listLoading.setVisibility(View.VISIBLE);
@@ -115,7 +115,7 @@ public class HomeMainFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(),
+                Toast.makeText(getContext(),
                         "Something is wrong ! Please, Try Again...", Toast.LENGTH_SHORT).show();
                 mAdapter.notifyDataSetChanged();
                 listLoading.setVisibility(View.GONE);

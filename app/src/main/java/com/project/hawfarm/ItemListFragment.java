@@ -1,13 +1,14 @@
 package com.project.hawfarm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,13 @@ public class ItemListFragment extends Fragment {
 
     View mainView;
     TextView textHawkerName, textHawkerAddress;
+    FloatingActionButton addItemToCartFAB;
 
     JSONObject hawkerData;
     JSONArray productArray;
     List<JSONObject> productList;
 
     ItemAdapter itemAdapter;
-    List<JSONObject> cartItemList;
 
     @Nullable
     @Override
@@ -51,20 +52,16 @@ public class ItemListFragment extends Fragment {
             e.printStackTrace();
         }
 
-        cartItemList = new ArrayList<>();
-        setRecyclerView();
-
-        mainView.setOnKeyListener(new View.OnKeyListener() {
+        addItemToCartFAB = mainView.findViewById(R.id.add_item_to_cart);
+        addItemToCartFAB.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if( keyCode == KeyEvent.KEYCODE_BACK )
-                {
-                    Log.d("KEY","PRESSED");
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CartViewActivity.class);
+                startActivity(intent);
             }
         });
+
+        setRecyclerView();
 
         return mainView;
     }
@@ -77,7 +74,7 @@ public class ItemListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         productList = new ArrayList<>();
-        itemAdapter = new ItemAdapter(getActivity().getApplicationContext(), productList, this);
+        itemAdapter = new ItemAdapter(getContext(), productList, this);
         recyclerView.setAdapter(itemAdapter);
 
         for (int i = 0; i < productArray.length(); i++) {
@@ -94,20 +91,12 @@ public class ItemListFragment extends Fragment {
         textHawkerName = mainView.findViewById(R.id.text_hawker_name);
         textHawkerAddress = mainView.findViewById(R.id.text_address);
 
+        CartData.cartItemList.clear();
         try {
-            textHawkerName.setText(hawkerData.getString("name"));
+            textHawkerName.setText(hawkerData.getString("email")); //TODO: Change to name
             //textHawkerAddress.setText(hawkerData.getString("address"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void addItemList(JSONObject itemData) {
-        cartItemList.add(itemData);
-        Log.d("CARTITEMLIST", cartItemList.toString());
-    }
-
-    public boolean onBackPressed() {
-        return false;
     }
 }

@@ -57,7 +57,7 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
                 }
             }
             hawkerViewHolder.textVegName.setText(allVegName);
-            hawkerViewHolder.textSellerName.setText(currentStock.getString("name"));
+            hawkerViewHolder.textSellerName.setText(currentStock.getString("email")); //TODO: Change to name
         } catch (JSONException e) {
             e.printStackTrace();
         }

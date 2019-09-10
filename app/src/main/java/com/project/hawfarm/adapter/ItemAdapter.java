@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         this.fragment = fragment;
     }
 
+    public ItemAdapter(Context context, List<JSONObject> itemsList) {
+        this.context = context;
+        this.itemsList = itemsList;
+    }
+
+    @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_cardview, viewGroup, false);
@@ -44,7 +51,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         try {
             itemViewHolder.itemName.setText(item.getString("veg_name"));
-            itemViewHolder.price.setText(item.getString("price"));  //TODO: Change it later
+
+            int price;
+            if (fragment == null) {
+                //Call when cart view created.
+                itemViewHolder.itemAddButton.setText(item.getString("weight"));
+                price = item.getInt("price");
+            } else {
+                //Call when ItemList Created.
+                price = item.getJSONArray("price").getJSONObject(0).getInt("price");
+            }
+            itemViewHolder.priceField.setText("₹ " + price);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,11 +72,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 Bundle bundle = new Bundle();
                 bundle.putString("itemData", item.toString());
 
-                FragmentTransaction fragmentTransaction = fragment.getFragmentManager().beginTransaction().addToBackStack(null);
-                DialogFragment dialog = new AddItemDialog();
-                dialog.setArguments(bundle);
-                dialog.setTargetFragment(fragment, 0);
-                dialog.show(fragmentTransaction, "addItemDialog");
+                if (fragment != null) {
+                    FragmentTransaction fragmentTransaction = fragment.getFragmentManager().beginTransaction().addToBackStack(null);
+                    DialogFragment dialog = new AddItemDialog();
+                    dialog.setArguments(bundle);
+                    dialog.show(fragmentTransaction, "addItemDialog");
+                } else {
+                    AppCompatActivity activity = (AppCompatActivity) context;
+                    FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction().addToBackStack(null);
+                    DialogFragment dialog = new AddItemDialog();
+                    dialog.setArguments(bundle);
+                    dialog.show(fragmentTransaction, "addItemDialog");
+                }
             }
         });
     }
@@ -71,14 +95,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, price, description;
+        TextView itemName, priceField, description;
         Button itemAddButton;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemName = itemView.findViewById(R.id.item_name);
-            price = itemView.findViewById(R.id.item_price);
+            priceField = itemView.findViewById(R.id.item_price);
             description = itemView.findViewById(R.id.item_description);
             itemAddButton = itemView.findViewById(R.id.item_add_button);
         }

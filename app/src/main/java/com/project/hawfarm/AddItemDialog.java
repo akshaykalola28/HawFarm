@@ -13,10 +13,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class AddItemDialog extends DialogFragment {
@@ -24,10 +22,8 @@ public class AddItemDialog extends DialogFragment {
     View mainView;
     double weight, totalPrice;
     TextView textHawkerItemName, priceField;
-    String priceString;
+    int priceInt;
     JSONObject itemData;
-
-    List<JSONObject> cartItemList;
 
     @Nullable
     @Override
@@ -37,21 +33,32 @@ public class AddItemDialog extends DialogFragment {
         try {
             String itemDataString = getArguments().getString("itemData");
             itemData = new JSONObject(itemDataString);
-            priceString = itemData.getString("price");
+            priceInt = itemData.getJSONArray("price").getJSONObject(0).getInt("price");
             setDetails();
         } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                priceInt = itemData.getInt("price");
+                setDetails();
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+            }
         }
 
-        cartItemList = new ArrayList<>();
 
         Button btn = mainView.findViewById(R.id.btnSubmit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemListFragment itemListFragment = (ItemListFragment) getTargetFragment();
-                itemListFragment.addItemList(itemData);
-                dismiss();
+                try {
+                    itemData.put("weight", weight);
+                    itemData.put("price", totalPrice);
+                    //Add item from here
+                    CartData.cartItemList.add(itemData);
+                    Log.d("ITEMFORCART", CartData.cartItemList.toString());
+                    dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -59,7 +66,7 @@ public class AddItemDialog extends DialogFragment {
         weightSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int price = Integer.parseInt(priceString);
+                int price = priceInt;
                 if (position == 0) {
                     weight = 250;
                     totalPrice = price * 1;
@@ -73,7 +80,6 @@ public class AddItemDialog extends DialogFragment {
                 setTotalPrice(totalPrice);
                 Log.d("DEMO", weight + "");
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

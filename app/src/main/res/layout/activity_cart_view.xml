@@ -46,19 +46,18 @@
                 android:layout_below="@+id/cart_text_address"
                 android:background="@color/lightDark" />
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recycleview_cart"
-                android:layout_below="@+id/cart_view1">
-
-            </android.support.v7.widget.RecyclerView>
             <View
                 android:id="@+id/cart_view2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@+id/recycleview_cart"
+                android:layout_below="@+id/recyclerview_cart"
                 android:background="@color/lightDark" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cart_view1" />
 
             <TextView
                 android:id="@+id/cart_text_itemtotal"
@@ -95,13 +94,6 @@
             android:layout_height="wrap_content"
             android:text="Apply PromoCode"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=">"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -225,15 +217,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Make Payment"
                 android:layout_centerVertical="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                android:text="Make Payment"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_arrow_forward_black"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_arrow_forward_black" />
 
         </RelativeLayout>
 
