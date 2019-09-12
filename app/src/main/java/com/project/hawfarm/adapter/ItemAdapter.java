@@ -7,10 +7,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -47,6 +50,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
+        setAnimation(itemViewHolder);
         final JSONObject item = itemsList.get(i);
 
         try {
@@ -89,6 +93,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         });
     }
 
+    private void setAnimation(ItemViewHolder itemViewHolder) {
+        Animation slideRelativeLayout1 = AnimationUtils.loadAnimation(context, R.anim.item_list_ani_card_view);
+        itemViewHolder.itemCardView.setAnimation(slideRelativeLayout1);
+    }
+
     @Override
     public int getItemCount() {
         return itemsList.size();
@@ -99,9 +108,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         TextView itemName, priceField, itemDescription;
         Button itemAddButton;
 
+        CardView itemCardView;
+
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            itemCardView = itemView.findViewById(R.id.item_card_view);
             itemName = itemView.findViewById(R.id.item_name);
             priceField = itemView.findViewById(R.id.item_price);
             itemDescription = itemView.findViewById(R.id.item_description);

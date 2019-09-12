@@ -1,11 +1,15 @@
 package com.project.hawfarm;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -33,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText nameField, emailField, passField, cpassField, mobileField, addressField, pincodeField;
     Button submitDataButton;
     String name, email, pass, cpass, address, mobileString, pincodeString;
+    ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +73,28 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-        setAnimations();
-    }
 
+        submitDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getValidData()) {
+                    mDialog = new ProgressDialog(SignUpActivity.this);
+                    mDialog.setMessage("Please Wait..");
+                    mDialog.show();
+                    submitData();
+                }
+            }
+        });
+        setAnimations();
+        changeStatusBarColor();
+    }
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+    }
     private void setAnimations() {
         CardView SignuoCardview = findViewById(R.id.sign_up_cardview);
         Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);

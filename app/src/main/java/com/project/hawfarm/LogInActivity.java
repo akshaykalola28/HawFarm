@@ -1,10 +1,10 @@
 package com.project.hawfarm;
 
-import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -35,7 +37,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 public class LogInActivity extends AppCompatActivity {
     private static final String TAG = "LogInActivity";
 
@@ -44,6 +45,7 @@ public class LogInActivity extends AppCompatActivity {
     String email, pass;
     Button btn_login;
     SharedPreferences mPreferences;
+    ProgressDialog mDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,13 +98,23 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
-        setAnimations();
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getValidData()) {
+                    mDialog = new ProgressDialog(LogInActivity.this);
+                    mDialog.setMessage("Please Wait..");
+                    mDialog.show();
+                    userLogin();
+                }
+            }
+        });
 
+        setAnimations();
+        changeStatusBarColor();
     }
 
-
-    private void setAnimations()
-    {
+    private void setAnimations() {
         CardView loginCardview = findViewById(R.id.login_CardView);
         Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         loginCardview.setAnimation(fromBottom);
@@ -112,8 +124,14 @@ public class LogInActivity extends AppCompatActivity {
         ImageView logoImageView = findViewById(R.id.company_logo);
         Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
         logoImageView.setAnimation(fromtop);
+    }
 
-
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
     }
 
     private boolean getValidData() {
@@ -145,24 +163,27 @@ public class LogInActivity extends AppCompatActivity {
                             if (success.equals("true")) {
                                 String data = jsonObject.getString("data");
                                 Log.d(TAG, "data: " + data);
-
                                 savePreferences(data);
+                                mDialog.dismiss();
                                 Intent intent = new Intent(LogInActivity.this, HomeActivity.class);
                                 intent.putExtra("userData", data);
                                 startActivity(intent);
                                 finish();
                             } else {
                                 String data = jsonObject.getString("data");
+                                mDialog.dismiss();
                                 Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
                                         data, Snackbar.LENGTH_INDEFINITE).show();
                             }
                         } catch (JSONException e) {
+                            mDialog.dismiss();
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                mDialog.dismiss();
                 error.printStackTrace();
                 Toast.makeText(LogInActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
