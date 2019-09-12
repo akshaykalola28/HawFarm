@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.hawfarm.adapter.ItemAdapter;
 
@@ -25,6 +26,7 @@ import java.util.List;
 
 public class ItemListFragment extends Fragment {
 
+    private static final String TAG = "ItemListFragment";
     View mainView;
     TextView textHawkerName, textHawkerAddress;
     FloatingActionButton addItemToCartFAB;
@@ -46,6 +48,12 @@ public class ItemListFragment extends Fragment {
             hawkerData = new JSONObject(hawkerDataString);
             productArray = hawkerData.getJSONArray("product");
 
+            //Store Only hawker data without
+            JSONObject hawkerDataLocal = hawkerData;
+            hawkerDataLocal.remove("product");
+            CartData.hawkerDataInCart = hawkerDataLocal;
+            Log.d(TAG, "onCreateView: " + CartData.hawkerDataInCart);
+
             Log.i("PRINT", productArray.toString());
             setDetails();
         } catch (Exception e) {
@@ -56,8 +64,12 @@ public class ItemListFragment extends Fragment {
         addItemToCartFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CartViewActivity.class);
-                startActivity(intent);
+                if (!CartData.cartItemList.isEmpty()) {
+                    Intent intent = new Intent(getContext(), CartViewActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Cart is Empty.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

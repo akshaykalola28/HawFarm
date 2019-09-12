@@ -8,4 +8,5 @@ import java.util.List;
 public class CartData {
 
     public static List<JSONObject> cartItemList = new ArrayList<>();
+    public static JSONObject hawkerDataInCart = new JSONObject();
 }

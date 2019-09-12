@@ -30,16 +30,16 @@
                 android:layout_below="@+id/dialog_image"
                 android:layout_marginTop="5dp"
                 android:textColor="#000000"
-                android:text="1234568751"
+                android:text="Product Name"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/seller_name_dialog"
+                android:id="@+id/item_description_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_name_dialog"
                 android:layout_marginTop="5dp"
-                android:text="00000000"
+                android:text="Description"
                 android:textColor="#000000" />
 
             <RelativeLayout

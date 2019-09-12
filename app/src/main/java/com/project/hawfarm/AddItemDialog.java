@@ -1,5 +1,7 @@
 package com.project.hawfarm;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,9 +21,10 @@ import org.json.JSONObject;
 
 public class AddItemDialog extends DialogFragment {
 
+    private static final String TAG = "AddItemDialog";
     View mainView;
     double weight, totalPrice;
-    TextView textHawkerItemName, priceField;
+    TextView itemNameField, priceField, descriptionField;
     int priceInt;
     JSONObject itemData;
 
@@ -37,7 +40,7 @@ public class AddItemDialog extends DialogFragment {
             setDetails();
         } catch (Exception e) {
             try {
-                priceInt = itemData.getInt("price");
+                priceInt = itemData.getInt("basePrice");
                 setDetails();
             } catch (JSONException ex) {
                 ex.printStackTrace();
@@ -50,6 +53,7 @@ public class AddItemDialog extends DialogFragment {
             public void onClick(View v) {
                 boolean isAdded = false;
                 try {
+                    itemData.put("basePrice", priceInt);
                     itemData.put("weight", weight);
                     itemData.put("price", totalPrice);
                     //Add item from here
@@ -111,16 +115,24 @@ public class AddItemDialog extends DialogFragment {
 
     private void setDetails() {
         //textHawkerName = mainView.findViewById(R.id.product_name_dialog);
-        textHawkerItemName = mainView.findViewById(R.id.seller_name_dialog);
+        itemNameField = mainView.findViewById(R.id.product_name_dialog);
         priceField = mainView.findViewById(R.id.totalprice);
-
+        descriptionField = mainView.findViewById(R.id.item_description_dialog);
         try {
-            textHawkerItemName.setText(itemData.getString("veg_name"));
+            itemNameField.setText(itemData.getString("veg_name"));
+            descriptionField.setText(itemData.getString("description"));
             //textHawkerAddress.setText(hawkerData.getString("address"));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        final Activity activity = getActivity();
+        if (activity instanceof DialogInterface.OnDismissListener) {
+            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
+        }
+    }
 }

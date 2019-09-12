@@ -1,5 +1,6 @@
 package com.project.hawfarm;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.project.hawfarm.adapter.ItemAdapter;
 
-public class CartViewActivity extends AppCompatActivity {
+public class CartViewActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
     ItemAdapter itemAdapter;
 
@@ -33,6 +34,11 @@ public class CartViewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        itemAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
         itemAdapter.notifyDataSetChanged();
     }
 }

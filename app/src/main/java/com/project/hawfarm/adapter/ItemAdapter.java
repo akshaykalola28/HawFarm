@@ -51,6 +51,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         try {
             itemViewHolder.itemName.setText(item.getString("veg_name"));
+            itemViewHolder.itemDescription.setText(item.getString("description"));
 
             int price;
             if (fragment == null) {
@@ -95,7 +96,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, priceField, description;
+        TextView itemName, priceField, itemDescription;
         Button itemAddButton;
 
         public ItemViewHolder(@NonNull View itemView) {
@@ -103,7 +104,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
             itemName = itemView.findViewById(R.id.item_name);
             priceField = itemView.findViewById(R.id.item_price);
-            description = itemView.findViewById(R.id.item_description);
+            itemDescription = itemView.findViewById(R.id.item_description);
             itemAddButton = itemView.findViewById(R.id.item_add_button);
         }
     }
