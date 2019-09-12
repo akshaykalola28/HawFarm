@@ -1,23 +1,66 @@
 package com.project.hawfarm;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.project.hawfarm.adapter.ItemAdapter;
 
+@SuppressLint("SetTextI18n")
 public class CartViewActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
     ItemAdapter itemAdapter;
+    TextView hawkerNameField, hawkerAddressField, totalItemField, itemPriceField, itemPriceField2,
+            chargePriceField, grandTotalField;
+    int itemPrice, chargePrice = 10, grandTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_view);
 
+        try {
+            setDetails();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         setRecyclerView();
+    }
+
+    private void setDetails() throws Exception {
+        hawkerNameField = findViewById(R.id.cart_text_Name);
+        hawkerAddressField = findViewById(R.id.cart_text_address);
+        totalItemField = findViewById(R.id.cart_text_itemtotal);
+        itemPriceField = findViewById(R.id.cart_item_price);
+        itemPriceField2 = findViewById(R.id.cart_item_price2);
+        chargePriceField = findViewById(R.id.cart_charges_price);
+        grandTotalField = findViewById(R.id.cart_grand_total);
+
+        hawkerNameField.setText(CartData.hawkerDataInCart.getString("email")); //TODO: change to name
+        //hawkerAddressField.setText(CartData.hawkerDataInCart.getString("address")); //TODO: uncomment when data comes
+        totalItemField.setText("Total Item: " + CartData.cartItemList.size());
+        setItemPrice();
+    }
+
+    private void setItemPrice() throws Exception {
+        int price = 0;
+        for (int i = 0; i < CartData.cartItemList.size(); i++) {
+            price += CartData.cartItemList.get(i).getInt("price");
+        }
+        itemPrice = price;
+        itemPriceField.setText("₹ " + itemPrice);
+        itemPriceField2.setText("₹ " + itemPrice);
+
+        //Set Charge Price
+        chargePriceField.setText("₹ " + chargePrice);
+
+        //Set Grand Total
+        grandTotal = itemPrice + chargePrice;
+        grandTotalField.setText("₹ " + grandTotal);
     }
 
     private void setRecyclerView() {
@@ -40,5 +83,10 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
     @Override
     public void onDismiss(DialogInterface dialog) {
         itemAdapter.notifyDataSetChanged();
+        try {
+            setItemPrice();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
