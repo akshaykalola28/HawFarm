@@ -44,18 +44,34 @@ public class AddItemDialog extends DialogFragment {
             }
         }
 
-
         Button btn = mainView.findViewById(R.id.btnSubmit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean isAdded = false;
                 try {
                     itemData.put("weight", weight);
                     itemData.put("price", totalPrice);
                     //Add item from here
-                    CartData.cartItemList.add(itemData);
-                    Log.d("ITEMFORCART", CartData.cartItemList.toString());
-                    dismiss();
+                    if (CartData.cartItemList.size() != 0) {
+                        for (int i = 0; i < CartData.cartItemList.size(); i++) {
+                            JSONObject cartItem = CartData.cartItemList.get(i);
+                            Log.d("ID", cartItem.getString("id") + " | " + itemData.getString("id"));
+                            if (cartItem.getString("id").trim().equals(itemData.getString("id").trim())) {
+                                Log.d("S", "Done");
+                                CartData.cartItemList.set(i, itemData);
+                                Log.d("ITEMFORCART2", CartData.cartItemList.toString());
+                                isAdded = true;
+                                dismiss();
+                                break;
+                            }
+                        }
+                    }
+                    if (!isAdded) {
+                        CartData.cartItemList.add(itemData);
+                        Log.d("ITEMFORCART", CartData.cartItemList.toString());
+                        dismiss();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

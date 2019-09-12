@@ -136,7 +136,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         }).show();
                             } else {
                                 Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
-                                        "Registration Successful " + data, Snackbar.LENGTH_INDEFINITE)
+                                        data, Snackbar.LENGTH_INDEFINITE)
                                         .setAction("Log In", new View.OnClickListener() {
                                             public void onClick(View v) {
                                                 startActivity(new Intent(SignUpActivity.this, LogInActivity.class));

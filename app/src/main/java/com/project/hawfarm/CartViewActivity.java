@@ -29,4 +29,10 @@ public class CartViewActivity extends AppCompatActivity {
         itemAdapter = new ItemAdapter(CartViewActivity.this, CartData.cartItemList);
         recyclerView.setAdapter(itemAdapter);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        itemAdapter.notifyDataSetChanged();
+    }
 }
