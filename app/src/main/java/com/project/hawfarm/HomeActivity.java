@@ -48,6 +48,8 @@ public class HomeActivity extends AppCompatActivity
         userDataString = getIntent().getStringExtra("userData");
         try {
             JSONObject userDataJson = new JSONObject(userDataString.trim());
+            CartData.currentCustomerData = userDataJson;
+
 
             displayName.setText(userDataJson.getString("name"));
             displayEmail.setText(userDataJson.getString("email"));

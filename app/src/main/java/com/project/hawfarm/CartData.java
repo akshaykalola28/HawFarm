@@ -9,4 +9,5 @@ public class CartData {
 
     public static List<JSONObject> cartItemList = new ArrayList<>();
     public static JSONObject hawkerDataInCart = new JSONObject();
+    public static JSONObject currentCustomerData = new JSONObject();
 }
