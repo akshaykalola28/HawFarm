@@ -9,5 +9,6 @@
     <color name="non">#00000000</color>
     <color name="Dark">#000000</color>
     <color name="lightDark">#E6444343</color>
+    <color name="Gray">#808080</color>
 
 </resources>

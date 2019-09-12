@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/image_cart"
-                android:text="Compny Name"
+                android:text="Company Name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -43,26 +43,30 @@
                 android:id="@+id/cart_view1"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/cart_text_address"
-                android:background="@color/lightDark" />
+                android:background="@color/Gray" />
 
             <View
                 android:id="@+id/cart_view2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/recyclerview_cart"
-                android:background="@color/lightDark" />
+                android:background="@color/Gray" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/cart_view1" />
 
             <TextView
                 android:id="@+id/cart_text_itemtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/cart_view2"
                 android:text="@string/item_total"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -71,6 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cart_view2"
+                android:layout_marginTop="5dp"
                 android:layout_alignParentRight="true"
                 android:text="Price"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -199,14 +204,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/payment_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="COD"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:layout_width="wrap_content"
