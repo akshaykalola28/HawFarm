@@ -39,6 +39,9 @@
     <string name="country_prompt">country_prompt</string>
     <string name="item_total">Item Total</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="country_arrays">
         <item>250gm</item>
         <item>500gm</item>

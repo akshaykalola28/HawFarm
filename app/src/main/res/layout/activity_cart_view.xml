@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/card_view_1"
                 android:layout_marginTop="10dp"
-                app:contentPadding="5dp">
+                app:contentPadding="10dp">
 
                 <TextView
                     android:id="@+id/apply_promocode"
@@ -157,7 +157,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/price_text"
                         android:text="Grand Total"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textColor="#54a0e7"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/cart_grand_total"
@@ -166,7 +168,9 @@
                         android:layout_below="@+id/cart_charges_price"
                         android:layout_alignParentRight="true"
                         android:text="Price"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textColor="#54A0E7"
+                        android:textStyle="bold" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
@@ -225,15 +229,19 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
                 android:text="Make Payment"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <TextView
+                android:id="@+id/cart_item_payment"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/ic_arrow_forward_black" />
+                android:onClick="payment_option"
+                android:background="@drawable/ic_arrow_forward_black"
+                tools:ignore="OnClick" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>
