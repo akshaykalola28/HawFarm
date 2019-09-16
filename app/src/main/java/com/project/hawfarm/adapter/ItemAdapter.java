@@ -15,10 +15,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.hawfarm.AddItemDialog;
 import com.project.hawfarm.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -56,6 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         try {
             itemViewHolder.itemName.setText(item.getString("veg_name"));
             itemViewHolder.itemDescription.setText(item.getString("description"));
+            Picasso.get().load(item.getString("imageURL")).into(itemViewHolder.vegImage);
 
             int price;
             if (fragment == null) {
@@ -107,7 +110,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         TextView itemName, priceField, itemDescription;
         Button itemAddButton;
-
+        ImageView vegImage;
         CardView itemCardView;
 
         public ItemViewHolder(@NonNull View itemView) {
@@ -118,6 +121,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             priceField = itemView.findViewById(R.id.item_price);
             itemDescription = itemView.findViewById(R.id.item_description);
             itemAddButton = itemView.findViewById(R.id.item_add_button);
+            vegImage = itemView.findViewById(R.id.veg_img);
         }
     }
 }

@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +28,7 @@ public class AddItemDialog extends DialogFragment {
     View mainView;
     double weight, totalPrice;
     TextView itemNameField, priceField, descriptionField;
+    ImageView itemImage;
     int priceInt;
     JSONObject itemData;
 
@@ -118,9 +122,11 @@ public class AddItemDialog extends DialogFragment {
         itemNameField = mainView.findViewById(R.id.product_name_dialog);
         priceField = mainView.findViewById(R.id.totalprice);
         descriptionField = mainView.findViewById(R.id.item_description_dialog);
+        itemImage = mainView.findViewById(R.id.dialog_image);
         try {
             itemNameField.setText(itemData.getString("veg_name"));
             descriptionField.setText(itemData.getString("description"));
+            Picasso.get().load(itemData.getString("imageURL")).into(itemImage);
             //textHawkerAddress.setText(hawkerData.getString("address"));
         } catch (Exception e) {
             e.printStackTrace();

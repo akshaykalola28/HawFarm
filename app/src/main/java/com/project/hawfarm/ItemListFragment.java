@@ -105,8 +105,9 @@ public class ItemListFragment extends Fragment {
 
         CartData.cartItemList.clear();
         try {
-            textHawkerName.setText(hawkerData.getString("email")); //TODO: Change to name
-            //textHawkerAddress.setText(hawkerData.getString("address"));
+            textHawkerName.setText(hawkerData.getString("name")); //TODO: Change to name
+            textHawkerAddress.setText(hawkerData.getJSONArray("address").getJSONObject(0).getString("address") + ", " +
+                    hawkerData.getJSONArray("address").getJSONObject(0).getString("pincode"));
         } catch (Exception e) {
             e.printStackTrace();
         }

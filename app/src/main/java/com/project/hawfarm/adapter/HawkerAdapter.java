@@ -1,8 +1,6 @@
 package com.project.hawfarm.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -25,7 +23,8 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import static com.project.hawfarm.R.*;
+import static com.project.hawfarm.R.anim;
+import static com.project.hawfarm.R.id;
 
 public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerViewHolder> {
 
@@ -43,7 +42,7 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
     @NonNull
     @Override
     public HawkerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
-        View view = LayoutInflater.from(context).inflate(layout.seller_cardview, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.seller_cardview, viewGroup, false);
 
         return new HawkerViewHolder(view);
     }
@@ -66,7 +65,7 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
                 }
             }
             hawkerViewHolder.textVegName.setText(allVegName);
-            hawkerViewHolder.textSellerName.setText(currentStock.getString("email")); //TODO: Change to name
+            hawkerViewHolder.textSellerName.setText(currentStock.getString("name"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

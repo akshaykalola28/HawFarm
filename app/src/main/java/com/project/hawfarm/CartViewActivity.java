@@ -17,15 +17,13 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
 
     ItemAdapter itemAdapter;
     TextView hawkerNameField, hawkerAddressField, totalItemField, itemPriceField, itemPriceField2,
-            chargePriceField, grandTotalField,paymentField;
+            chargePriceField, grandTotalField, paymentField;
     int itemPrice, chargePrice = 10, grandTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_view);
-
-
 
         try {
             setDetails();
@@ -34,8 +32,6 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
         }
         setRecyclerView();
     }
-
-
 
     private void setDetails() throws Exception {
         hawkerNameField = findViewById(R.id.cart_text_Name);
@@ -47,8 +43,9 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
         grandTotalField = findViewById(R.id.cart_grand_total);
         paymentField = findViewById(R.id.cart_item_payment);
 
-        hawkerNameField.setText(CartData.hawkerDataInCart.getString("email")); //TODO: change to name
-        //hawkerAddressField.setText(CartData.hawkerDataInCart.getString("address")); //TODO: uncomment when data comes
+        hawkerNameField.setText(CartData.hawkerDataInCart.getString("name"));
+        hawkerAddressField.setText(CartData.hawkerDataInCart.getJSONArray("address").getJSONObject(0).getString("address") + ", " +
+                CartData.hawkerDataInCart.getJSONArray("address").getJSONObject(0).getString("pincode"));
         totalItemField.setText("Total Item: " + CartData.cartItemList.size());
         setItemPrice();
 
@@ -82,7 +79,6 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
         recyclerView.setAdapter(itemAdapter);
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -98,7 +94,6 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
             e.printStackTrace();
         }
     }
-
 
     public void payment_option(View view) {
         Intent intent = new Intent(CartViewActivity.this, PaymentOptionActivity.class);
