@@ -44,8 +44,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
-
         nameField = findViewById(R.id.input_name);
         emailField = findViewById(R.id.input_email);
         passField = findViewById(R.id.input_password);
@@ -151,6 +149,7 @@ public class SignUpActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String data = jsonObject.getString("data");
                             if (data.equals("ER_DUP_ENTRY")) {
+                                mDialog.dismiss();
                                 Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
                                         "User Already Exists. Please try to LogIn", Snackbar.LENGTH_INDEFINITE)
                                         .setAction("Log In", new View.OnClickListener() {
@@ -159,6 +158,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             }
                                         }).show();
                             } else {
+                                mDialog.dismiss();
                                 Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
                                         data, Snackbar.LENGTH_INDEFINITE)
                                         .setAction("Log In", new View.OnClickListener() {
@@ -167,7 +167,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             }
                                         }).show();
                             }
-                            Toast.makeText(SignUpActivity.this, jsonObject.getString("data"), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignUpActivity.this, jsonObject.getString("data"), Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -176,6 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        mDialog.dismiss();
                         Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
                                 "Something is Wrong! Please try again.", Snackbar.LENGTH_SHORT).show();
                         Toast.makeText(SignUpActivity.this, error.toString(), Toast.LENGTH_SHORT).show();

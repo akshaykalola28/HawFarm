@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".payment_option"
-            android:label="PaymentOption"></activity>
+        <activity
+            android:name=".PaymentOptionActivity"
+            android:label="Make Payment" />
         <activity android:name=".UserProfile" />
         <activity
             android:name=".SplashScreen"
@@ -50,8 +51,8 @@
             android:theme="@style/AppTheme.FullScreenTheme" />
         <activity android:name=".SelectLangActivity" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

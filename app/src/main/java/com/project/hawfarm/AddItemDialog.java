@@ -60,8 +60,8 @@ public class AddItemDialog extends DialogFragment {
                     if (CartData.cartItemList.size() != 0) {
                         for (int i = 0; i < CartData.cartItemList.size(); i++) {
                             JSONObject cartItem = CartData.cartItemList.get(i);
-                            Log.d("ID", cartItem.getString("id") + " | " + itemData.getString("id"));
-                            if (cartItem.getString("id").trim().equals(itemData.getString("id").trim())) {
+                            Log.d("ID", cartItem.getString("stockId") + " | " + itemData.getString("stockId"));
+                            if (cartItem.getString("stockId").trim().equals(itemData.getString("stockId").trim())) {
                                 Log.d("S", "Done");
                                 CartData.cartItemList.set(i, itemData);
                                 Log.d("ITEMFORCART2", CartData.cartItemList.toString());

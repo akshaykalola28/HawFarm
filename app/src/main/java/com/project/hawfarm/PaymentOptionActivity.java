@@ -3,7 +3,7 @@ package com.project.hawfarm;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class payment_option extends AppCompatActivity {
+public class PaymentOptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
