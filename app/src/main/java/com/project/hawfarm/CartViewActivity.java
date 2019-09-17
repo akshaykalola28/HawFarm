@@ -97,6 +97,7 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
 
     public void payment_option(View view) {
         Intent intent = new Intent(CartViewActivity.this, PaymentOptionActivity.class);
+        intent.putExtra("GrandTotal",String.valueOf(grandTotal));
         startActivity(intent);
     }
 

@@ -14,7 +14,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".PaymentOptionActivity"
-            android:label="Make Payment" />
+            android:label="Make Payment" android:screenOrientation="portrait" />
         <activity android:name=".UserProfile" />
         <activity
             android:name=".SplashScreen"
