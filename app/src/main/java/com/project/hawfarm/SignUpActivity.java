@@ -2,11 +2,17 @@ package com.project.hawfarm;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,6 +34,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +43,10 @@ public class SignUpActivity extends AppCompatActivity {
     TextView signInView;
     EditText nameField, emailField, passField, cpassField, mobileField, addressField, pincodeField;
     Button submitDataButton;
-    String name, email, pass, cpass, address, mobileString, pincodeString;
+    String name, email, pass, cpass, address, mobileString, pincodeString,baseImg;
     ProgressDialog mDialog;
+    ImageView profile_image;
+    Uri fileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,20 @@ public class SignUpActivity extends AppCompatActivity {
         addressField = findViewById(R.id.input_address);
         pincodeField = findViewById(R.id.input_pincode);
         submitDataButton = findViewById(R.id.btn_signup);
+        profile_image = findViewById(R.id.input_profile_submit);
+
+        profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(intent, 100);
+                }catch (Exception e){
+                    Log.d("null", "onClick: no");
+                }
+            }
+        });
 
         signInView = findViewById(R.id.link_login);
         signInView.setOnClickListener(new View.OnClickListener() {
@@ -201,4 +224,27 @@ public class SignUpActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(SignUpActivity.this);
         requestQueue.add(stringRequest);
     }
-}
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        try {
+            // When an Image is picked
+            if (requestCode == 100 && resultCode == RESULT_OK) {
+                if (data != null && data.getExtras() != null) {
+                    Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+                    profile_image.setImageBitmap(imageBitmap);
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    baseImg = Base64.encodeToString(imageBytes, Base64.URL_SAFE); //Or use BAse64.DEFAULT
+                }
+            } else {
+                //TODO: remove resultCode on release
+                Toast.makeText(SignUpActivity.this, "You haven't picked up Image: " + resultCode, Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(SignUpActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+        }
+
+    }}
