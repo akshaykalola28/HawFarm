@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -40,7 +39,8 @@ import java.util.Map;
 public class LogInActivity extends AppCompatActivity {
     private static final String TAG = "LogInActivity";
 
-    TextView forgotPasswordField, signUpField;
+    TextView forgotPasswordField;
+    Button signUpField;
     EditText emailField, passField;
     String email, pass;
     Button btn_login;
@@ -50,10 +50,10 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.android_login);
 
         //for selecting language (only for once)
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean previouslyStarted = prefs.getBoolean("langSelectKey", false);
         if (!previouslyStarted) {
             SharedPreferences.Editor edit = prefs.edit();
@@ -61,12 +61,12 @@ public class LogInActivity extends AppCompatActivity {
             edit.apply();
             startActivity(new Intent(this, SelectLangActivity.class));
             finish();
-        }
+        }*/
         //End of Select Language activity
 
         emailField = findViewById(R.id.input_email);
         passField = findViewById(R.id.input_password);
-        btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login = findViewById(R.id.btn_login);
 
         // shared preferences
         mPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
@@ -130,7 +130,7 @@ public class LogInActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+            window.setStatusBarColor(getResources().getColor(R.color.colorAccent));
         }
     }
 

@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.project.hawfarm">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +17,8 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".PaymentOptionActivity"
-            android:label="Make Payment" android:screenOrientation="portrait" />
+            android:label="Make Payment"
+            android:screenOrientation="portrait" />
         <activity android:name=".UserProfile" />
         <activity
             android:name=".SplashScreen"
@@ -28,7 +32,7 @@
         </activity>
         <activity
             android:name=".CartViewActivity"
-            android:label="Cart"
+            android:label="My Cart"
             android:screenOrientation="portrait" />
         <activity
             android:name=".OrderDetails"
@@ -44,15 +48,11 @@
         <activity
             android:name=".SignUpActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LogInActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreenTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SelectLangActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

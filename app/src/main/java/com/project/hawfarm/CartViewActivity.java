@@ -100,5 +100,4 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
         intent.putExtra("GrandTotal",String.valueOf(grandTotal));
         startActivity(intent);
     }
-
 }

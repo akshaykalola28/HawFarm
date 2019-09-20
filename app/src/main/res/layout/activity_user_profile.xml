@@ -157,7 +157,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_below="@+id/Profile_address"/>
-
             <!-- End Address-->
 
             <!-- Button -->
@@ -173,7 +172,5 @@
                 android:textAllCaps="true"/>
 
         </RelativeLayout>
-
     </android.support.v7.widget.CardView>
-
 </RelativeLayout>

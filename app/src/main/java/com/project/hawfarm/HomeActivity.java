@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity
             JSONObject userDataJson = new JSONObject(userDataString.trim());
             CartData.currentCustomerData = userDataJson;
 
-
             displayName.setText(userDataJson.getString("name"));
             displayEmail.setText(userDataJson.getString("email"));
         } catch (JSONException e) {

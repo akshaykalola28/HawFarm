@@ -20,8 +20,11 @@
 
             <ImageView
                 android:id="@+id/veg_img"
-                android:layout_width="109dp"
-                android:layout_height="99dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher_round" />
 
             <TextView

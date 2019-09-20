@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
@@ -43,39 +44,35 @@ public class PaymentOptionActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        orderItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (getValidData()) {
-//                    try {
-//                        mDialog = new ProgressDialog(PaymentOptionActivity.this);
-//                        mDialog.setMessage("Please Wait...");
-//                        mDialog.show();
-//                        submitOrder();
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-    }
 
+        CardView checkoutCardView = findViewById(R.id.make_payment_card);
+        checkoutCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getValidData()) {
+                    try {
+                        mDialog = new ProgressDialog(PaymentOptionActivity.this);
+                        mDialog.setMessage("Please Wait...");
+                        mDialog.show();
+                        submitOrder();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
     private boolean getValidData() {
         boolean valid = false;
 
-        if(paymentMethod==null)
-        {
-            Toast.makeText(getApplicationContext(),"Please Select PymentOption",Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        if (paymentMethod == null) {
+            Toast.makeText(getApplicationContext(), "Please Select Payment Option", Toast.LENGTH_SHORT).show();
+        } else {
             valid = true;
         }
         return valid;
-
     }
-
 
     private void setDetails() throws JSONException {
         paytm = findViewById(R.id.radio_paytm);
@@ -84,13 +81,13 @@ public class PaymentOptionActivity extends AppCompatActivity {
         creaditcard = findViewById(R.id.radio_cc);
     }
 
-    private void submitOrder() throws JSONException{
+    private void submitOrder() throws JSONException {
         JSONObject orderParams = new JSONObject();
 
         String buyerName = CartData.currentCustomerData.getString("name");
         String buyerEmail = CartData.currentCustomerData.getString("email");
         String buyerAddress = CartData.currentCustomerData.getJSONArray("address").getJSONObject(0).getString("address");
-        Log.d("BuyerAddress",buyerAddress);
+        Log.d("BuyerAddress", buyerAddress);
         String buyerNumber = CartData.currentCustomerData.getString("phone");
         grandTotal = getIntent().getStringExtra("GrandTotal");
 
@@ -98,8 +95,9 @@ public class PaymentOptionActivity extends AppCompatActivity {
         String sellerName = CartData.hawkerDataInCart.getString("name");
         String sellerEmail = CartData.hawkerDataInCart.getString("email");
         String sellerAddress = CartData.hawkerDataInCart.getJSONArray("address").getJSONObject(0).getString("address");
-        Log.d("SellerAddress",sellerAddress);
+        Log.d("SellerAddress", sellerAddress);
         String sellerNumber = CartData.hawkerDataInCart.getString("phone");
+        String sellerId = CartData.hawkerDataInCart.getString("userId");
 
         Log.d("cartData:", String.valueOf(CartData.cartItemList));
         JSONArray quantityArray = new JSONArray();
@@ -111,63 +109,59 @@ public class PaymentOptionActivity extends AppCompatActivity {
             quantitySingleObject.put("quantity", jsonObject.getString("weight"));
             quantityArray.put(quantitySingleObject);
         }
-        try {
-            orderParams.put("buyerName", buyerName);
-            orderParams.put("buyerEmail", buyerEmail);
-            orderParams.put("buyerAddress", buyerAddress);
-            orderParams.put("buyerNumber", buyerNumber);
-            orderParams.put("grandTotal", grandTotal);
-            orderParams.put("sellerName", sellerName);
-            orderParams.put("sellerEmail", sellerEmail);
-            orderParams.put("sellerAddress", sellerAddress);
-            orderParams.put("sellerNumber", sellerNumber);
-            orderParams.put("paymentMethod", paymentMethod);
-            orderParams.put("orderQuantity",quantityArray);
+        orderParams.put("buyerName", buyerName);
+        orderParams.put("buyerEmail", buyerEmail);
+        orderParams.put("buyerAddress", buyerAddress);
+        orderParams.put("buyerNumber", buyerNumber);
+        orderParams.put("grandTotal", grandTotal);
+        orderParams.put("sellerId", sellerId);
+        orderParams.put("sellerName", sellerName);
+        orderParams.put("sellerEmail", sellerEmail);
+        orderParams.put("sellerAddress", sellerAddress);
+        orderParams.put("sellerNumber", sellerNumber);
+        orderParams.put("paymentMethod", paymentMethod);
+        orderParams.put("orderQuantity", quantityArray);
 
-            Log.d(TAG, "setDetails: " + quantityArray);
+        Log.d(TAG, "setDetails: " + quantityArray);
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ServerData.ADD_ORDER_URL, orderParams, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        String success = response.getString("responseSuccess");
-                        Log.d("rseponse", String.valueOf(response));
-                        if (success.equals("true")) {
-                            mDialog.dismiss();
-                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentOptionActivity.this);
-                            alertDialogBuilder.setTitle("Add Order").setMessage("Order Added Successfully").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //TODO: set on click work
-                                }
-                            }).show();
-                        } else {
-                            mDialog.dismiss();
-                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentOptionActivity.this);
-                            alertDialogBuilder.setTitle("Add Order").setMessage("Failed to add Stock").setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //TODO: set on click work
-                                }
-                            }).show();
-                        }
-                    } catch (JSONException e) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ServerData.ADD_ORDER_URL, orderParams, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String success = response.getString("responseSuccess");
+                    Log.d("rseponse", String.valueOf(response));
+                    if (success.equals("true")) {
                         mDialog.dismiss();
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    mDialog.dismiss();
-                }
-            });
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentOptionActivity.this);
+                        alertDialogBuilder.setTitle("Add Order").setMessage("Order Added Successfully").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
-            RequestQueue requestQueue = Volley.newRequestQueue(PaymentOptionActivity.this);
-            requestQueue.add(jsonObjectRequest);
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
+                            }
+                        }).show();
+                    } else {
+                        mDialog.dismiss();
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentOptionActivity.this);
+                        alertDialogBuilder.setTitle("Add Order").setMessage("Failed to Place Order.").setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO: set on click work
+                            }
+                        }).show();
+                    }
+                } catch (JSONException e) {
+                    mDialog.dismiss();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mDialog.dismiss();
+                error.printStackTrace();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(PaymentOptionActivity.this);
+        requestQueue.add(jsonObjectRequest);
     }
 
     public void onRadioButtonClicked(View view) {
@@ -191,19 +185,5 @@ public class PaymentOptionActivity extends AppCompatActivity {
         }
         paymentMethod = str;
         Log.d("value", str);
-    }
-
-    public void Onclick(View view) {
-
-            if (getValidData()) {
-                try {
-                    mDialog = new ProgressDialog(PaymentOptionActivity.this);
-                    mDialog.setMessage("Please Wait...");
-                    mDialog.show();
-                    submitOrder();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
     }
 }

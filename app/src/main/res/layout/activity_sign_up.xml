@@ -52,8 +52,8 @@
                     android:layout_marginTop="10dp"
                     android:src="@drawable/profile_image"
                     app:civ_border_width="1dp"
-                    app:civ_shadow="true"
-                    app:civ_shadow_color="#03A9F4"
+                    app:civ_border="true"
+                    app:civ_border_color="@color/colorAccent"
                     app:civ_shadow_radius="10" />
 
 
