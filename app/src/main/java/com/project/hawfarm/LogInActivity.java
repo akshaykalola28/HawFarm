@@ -50,7 +50,7 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.android_login);
+        setContentView(R.layout.activity_log_in);
 
         //for selecting language (only for once)
         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -130,7 +130,7 @@ public class LogInActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.colorAccent));
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
     }
 

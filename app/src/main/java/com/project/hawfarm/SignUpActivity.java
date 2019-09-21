@@ -14,6 +14,7 @@ import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -21,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +42,12 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    TextView signInView;
+    private static final String TAG = "SignUpActivity";
+    Button signInButton;
     EditText nameField, emailField, passField, cpassField, mobileField, addressField, pincodeField;
+    ScrollView signUpScrollView;
     Button submitDataButton;
-    String name, email, pass, cpass, address, mobileString, pincodeString,baseImg;
+    String name, email, pass, cpass, address, mobileString, pincodeString, baseImg;
     ProgressDialog mDialog;
     ImageView profile_image;
     Uri fileUri;
@@ -63,6 +67,30 @@ public class SignUpActivity extends AppCompatActivity {
         submitDataButton = findViewById(R.id.btn_signup);
         profile_image = findViewById(R.id.input_profile_submit);
 
+        signUpScrollView = findViewById(R.id.sign_up_scroll);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            signUpScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    if (scrollY < oldScrollY) {
+                        Log.d(TAG, "onScrollChange: Scroll Down");
+                    } else {
+                        Log.d(TAG, "onScrollChange: Scroll Up");
+                    }
+                }
+            });
+        }
+        signUpScrollView.setSmoothScrollingEnabled(true);
+        /*signUpScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                int scrollY = signUpScrollView.getScrollY(); // For ScrollView
+                int scrollX = signUpScrollView.getScrollX();
+
+                Log.d(TAG, "onScrollChanged: " + scrollX + " | " + scrollY);
+            }
+        });*/
+
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,28 +98,19 @@ public class SignUpActivity extends AppCompatActivity {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                     startActivityForResult(intent, 100);
-                }catch (Exception e){
+                } catch (Exception e) {
                     Log.d("null", "onClick: no");
                 }
             }
         });
 
-        signInView = findViewById(R.id.link_login);
-        signInView.setOnClickListener(new View.OnClickListener() {
+        signInButton = findViewById(R.id.link_login);
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
                 startActivity(intent);
                 finish();
-            }
-        });
-
-        submitDataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getValidData()) {
-                    submitData();
-                }
             }
         });
 
@@ -109,6 +128,7 @@ public class SignUpActivity extends AppCompatActivity {
         setAnimations();
         changeStatusBarColor();
     }
+
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -116,14 +136,16 @@ public class SignUpActivity extends AppCompatActivity {
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
     }
+
     private void setAnimations() {
         CardView SignuoCardview = findViewById(R.id.sign_up_cardview);
         Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
         SignuoCardview.setAnimation(fromBottom);
 
-        ImageView logoImageView = findViewById(R.id.company_logo);
-        Animation fromtop=AnimationUtils.loadAnimation(this,R.anim.fromtop);
-        logoImageView.setAnimation(fromtop);
+        //TODO: Uncomment if you are adding a logo
+        /*ImageView logoImageView = findViewById(R.id.company_logo);
+        Animation fromtop = AnimationUtils.loadAnimation(this, R.anim.fromtop);
+        logoImageView.setAnimation(fromtop);*/
     }
 
     private boolean getValidData() {
@@ -246,5 +268,5 @@ public class SignUpActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(SignUpActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
-
-    }}
+    }
+}
