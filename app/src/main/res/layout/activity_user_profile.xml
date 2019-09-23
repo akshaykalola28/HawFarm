@@ -7,7 +7,8 @@
     android:background="@drawable/profil_background"
     tools:context=".UserProfile">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <!-- Circular Image View -->
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/profile_image"
         android:layout_width="80pt"
         android:layout_height="80pt"
@@ -19,9 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_image"
+        android:layout_margin="20sp"
         app:cardCornerRadius="5dp"
-        app:contentPadding="10dp"
-        android:layout_margin="20sp">
+        app:contentPadding="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -130,7 +131,7 @@
                 android:id="@+id/view_pro4"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@+id/Profile_pass"/>
+                android:layout_below="@+id/Profile_pass" />
             <!-- End Password-->
 
             <!-- Address-->
@@ -156,7 +157,7 @@
                 android:id="@+id/view_pro5"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@+id/Profile_address"/>
+                android:layout_below="@+id/Profile_address" />
             <!-- End Address-->
 
             <!-- Button -->
@@ -169,7 +170,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_style"
                 android:text="Save"
-                android:textAllCaps="true"/>
+                android:textAllCaps="true" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
