@@ -21,65 +21,42 @@
                 android:layout_height="wrap_content"
                 app:contentPadding="5dp">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/seller_info_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/image_cart"
-                        android:layout_width="20pt"
-                        android:layout_height="20pt"
-                        android:layout_marginEnd="5dp" />
+                    <!--<com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/seller_imageview"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/profile_image"
+                        app:civ_border="true"
+                        app:civ_border_color="@color/colorPrimaryDark"
+                        app:civ_border_width="1dp"
+                        app:civ_shadow_radius="10" />-->
 
                     <TextView
                         android:id="@+id/cart_text_Name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/image_cart"
-                        android:text="Company Name"
+                        android:layout_gravity="center"
+                        android:text="Seller Name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                     <TextView
                         android:id="@+id/cart_text_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/cart_text_Name"
-                        android:layout_toRightOf="@+id/image_cart"
+                        android:layout_gravity="center"
                         android:text="Address"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                    <TextView
-                        android:id="@+id/cart_text_itemtotal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/cart_view2"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/item_total"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                    <TextView
-                        android:id="@+id/cart_item_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/cart_view2"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="5dp"
-                        android:text="Price"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
                     <View
-                        android:id="@+id/cart_view1"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_below="@+id/cart_text_address"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/Gray" />
-
-                    <View
-                        android:id="@+id/cart_view2"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_below="@+id/recyclerview_cart"
+                        android:layout_height="1dp"
                         android:layout_marginTop="10dp"
                         android:background="@color/Gray" />
 
@@ -87,9 +64,39 @@
                         android:id="@+id/recyclerview_cart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/cart_view1"
-                        android:layout_marginTop="10dp" />
-                </RelativeLayout>
+                        android:layout_marginTop="5dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/Gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/cart_text_itemtotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="@string/item_total"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                        <TextView
+                            android:id="@+id/cart_item_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="Price"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    </LinearLayout>
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -105,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Apply PromoCode"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -124,23 +131,26 @@
                         android:id="@+id/total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/item_total"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                        android:layout_margin="5dp"
+                        android:text="Subtotal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
                         android:id="@+id/cart_item_price2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="5dp"
                         android:text="Price"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
-                        android:id="@+id/price_text"
+                        android:id="@+id/charges_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/total_price"
-                        android:text="Taxes &amp; charges"
+                        android:layout_margin="5dp"
+                        android:text="Delivery Charges"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                     <TextView
@@ -148,16 +158,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/cart_item_price2"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="5dp"
                         android:text="Price"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                    <View
+                        android:id="@+id/total_price_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/charges_text"
+                        android:layout_margin="5dp"
+                        android:background="@color/Gray" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/price_text"
+                        android:layout_below="@+id/total_price_divider"
+                        android:layout_margin="5dp"
                         android:text="Grand Total"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="#54a0e7"
                         android:textStyle="bold" />
 
@@ -165,81 +185,29 @@
                         android:id="@+id/cart_grand_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/cart_charges_price"
-                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/total_price_divider"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="5dp"
                         android:text="Price"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="#54A0E7"
                         android:textStyle="bold" />
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/card_view_3"
-                android:layout_marginTop="30dp"
-                app:contentPadding="5dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/cart_personal_details"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Personal Details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/cart_personal_details"
-                        android:text="Name &amp; Number"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="change"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
         </RelativeLayout>
     </ScrollView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/make_payment_card"
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:onClick="payment_option">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="80dp"
-                android:text="Make Payment"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/cart_item_payment"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/ic_arrow_forward_black" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/gradient_button"
+        android:onClick="payment_option"
+        android:text="Make Payment"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFF"
+        android:textStyle="bold" />
 </RelativeLayout>

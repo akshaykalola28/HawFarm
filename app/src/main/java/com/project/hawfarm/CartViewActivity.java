@@ -17,7 +17,7 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
 
     ItemAdapter itemAdapter;
     TextView hawkerNameField, hawkerAddressField, totalItemField, itemPriceField, itemPriceField2,
-            chargePriceField, grandTotalField, paymentField;
+            chargePriceField, grandTotalField;
     int itemPrice, chargePrice = 10, grandTotal;
 
     @Override
@@ -41,7 +41,6 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
         itemPriceField2 = findViewById(R.id.cart_item_price2);
         chargePriceField = findViewById(R.id.cart_charges_price);
         grandTotalField = findViewById(R.id.cart_grand_total);
-        paymentField = findViewById(R.id.cart_item_payment);
 
         hawkerNameField.setText(CartData.hawkerDataInCart.getString("name"));
         hawkerAddressField.setText(CartData.hawkerDataInCart.getJSONArray("address").getJSONObject(0).getString("address") + ", " +
@@ -97,7 +96,7 @@ public class CartViewActivity extends AppCompatActivity implements DialogInterfa
 
     public void payment_option(View view) {
         Intent intent = new Intent(CartViewActivity.this, PaymentOptionActivity.class);
-        intent.putExtra("GrandTotal",String.valueOf(grandTotal));
+        intent.putExtra("GrandTotal", String.valueOf(grandTotal));
         startActivity(intent);
     }
 }

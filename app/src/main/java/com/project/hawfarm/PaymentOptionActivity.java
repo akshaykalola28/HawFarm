@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,8 +46,8 @@ public class PaymentOptionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        CardView checkoutCardView = findViewById(R.id.make_payment_card);
-        checkoutCardView.setOnClickListener(new View.OnClickListener() {
+        Button checkoutButton = findViewById(R.id.checkout_button);
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getValidData()) {
@@ -133,17 +134,16 @@ public class PaymentOptionActivity extends AppCompatActivity {
                     if (success.equals("true")) {
                         mDialog.dismiss();
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentOptionActivity.this);
-                        alertDialogBuilder.setTitle("Add Order").setMessage("Order Added Successfully").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        alertDialogBuilder.setMessage("Order Added Successfully").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-
                             }
                         }).show();
                     } else {
                         mDialog.dismiss();
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentOptionActivity.this);
-                        alertDialogBuilder.setTitle("Add Order").setMessage("Failed to Place Order.").setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                        alertDialogBuilder.setMessage("Failed to Place Order.").setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO: set on click work
+
                             }
                         }).show();
                     }
