@@ -27,37 +27,49 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!--<com.mikhaellopez.circularimageview.CircularImageView
-                        android:id="@+id/seller_imageview"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/profile_image"
-                        app:civ_border="true"
-                        app:civ_border_color="@color/colorPrimaryDark"
-                        app:civ_border_width="1dp"
-                        app:civ_shadow_radius="10" />-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/cart_text_Name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Seller Name"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/seller_imageview"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/profile_image"
+                            app:civ_border="true"
+                            app:civ_border_color="@color/colorPrimaryDark"
+                            app:civ_border_width="1dp"
+                            app:civ_shadow_radius="10" />
 
-                    <TextView
-                        android:id="@+id/cart_text_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Address"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@id/seller_imageview"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/cart_text_Name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Seller Name"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                            <TextView
+                                android:id="@+id/cart_text_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Address"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                        </LinearLayout>
+                    </RelativeLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:background="@color/Gray" />
 
                     <android.support.v7.widget.RecyclerView

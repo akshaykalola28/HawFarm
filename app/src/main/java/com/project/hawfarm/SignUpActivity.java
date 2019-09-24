@@ -1,14 +1,18 @@
 package com.project.hawfarm;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Base64;
@@ -49,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button submitDataButton;
     String name, email, pass, cpass, address, mobileString, pincodeString, baseImg;
     ProgressDialog mDialog;
-    ImageView profile_image;
+    ImageView profileField;
     Uri fileUri;
 
     @Override
@@ -65,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
         addressField = findViewById(R.id.input_address);
         pincodeField = findViewById(R.id.input_pincode);
         submitDataButton = findViewById(R.id.btn_signup);
-        profile_image = findViewById(R.id.input_profile_submit);
+        profileField = findViewById(R.id.input_profile_submit);
 
         signUpScrollView = findViewById(R.id.sign_up_scroll);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -73,34 +77,24 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                     if (scrollY < oldScrollY) {
-                        Log.d(TAG, "onScrollChange: Scroll Down");
+                        //Scroll Down
                     } else {
-                        Log.d(TAG, "onScrollChange: Scroll Up");
+                        //Scroll Up
                     }
                 }
             });
         }
         signUpScrollView.setSmoothScrollingEnabled(true);
-        /*signUpScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                int scrollY = signUpScrollView.getScrollY(); // For ScrollView
-                int scrollX = signUpScrollView.getScrollX();
 
-                Log.d(TAG, "onScrollChanged: " + scrollX + " | " + scrollY);
-            }
-        });*/
 
-        profile_image.setOnClickListener(new View.OnClickListener() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+
+        profileField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                    startActivityForResult(intent, 100);
-                } catch (Exception e) {
-                    Log.d("null", "onClick: no");
-                }
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 100);
             }
         });
 
@@ -120,6 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (getValidData()) {
                     mDialog = new ProgressDialog(SignUpActivity.this);
                     mDialog.setMessage("Please Wait..");
+                    mDialog.setCanceledOnTouchOutside(false);
                     mDialog.show();
                     submitData();
                 }
@@ -200,6 +195,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         .setAction("Log In", new View.OnClickListener() {
                                             public void onClick(View v) {
                                                 startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
+                                                finish();
                                             }
                                         }).show();
                             } else {
@@ -209,10 +205,10 @@ public class SignUpActivity extends AppCompatActivity {
                                         .setAction("Log In", new View.OnClickListener() {
                                             public void onClick(View v) {
                                                 startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
+                                                finish();
                                             }
                                         }).show();
                             }
-                            //Toast.makeText(SignUpActivity.this, jsonObject.getString("data"), Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -239,6 +235,7 @@ public class SignUpActivity extends AppCompatActivity {
                 params.put("user_type", "customer");
                 params.put("address", address);
                 params.put("pincode", pincodeString);
+                params.put("base64Str", baseImg);
                 return params;
             }
         };
@@ -251,16 +248,22 @@ public class SignUpActivity extends AppCompatActivity {
 
         try {
             // When an Image is picked
-            if (requestCode == 100 && resultCode == RESULT_OK) {
-                if (data != null && data.getExtras() != null) {
-                    Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-                    profile_image.setImageBitmap(imageBitmap);
+            if (requestCode == 100 && resultCode == RESULT_OK && null != data) {
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                cursor.close();
+                profileField.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                Bitmap bitmapForProfile = BitmapFactory.decodeFile(picturePath);
 
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                    byte[] imageBytes = baos.toByteArray();
-                    baseImg = Base64.encodeToString(imageBytes, Base64.URL_SAFE); //Or use BAse64.DEFAULT
-                }
+                //Base-64
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmapForProfile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] imageBytes = baos.toByteArray();
+                baseImg = Base64.encodeToString(imageBytes, Base64.DEFAULT);
             } else {
                 //TODO: remove resultCode on release
                 Toast.makeText(SignUpActivity.this, "You haven't picked up Image: " + resultCode, Toast.LENGTH_LONG).show();
@@ -268,5 +271,11 @@ public class SignUpActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(SignUpActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }

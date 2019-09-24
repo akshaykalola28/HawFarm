@@ -13,7 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +24,7 @@ import org.json.JSONObject;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    ImageView displayUserImage;
     TextView displayName, displayEmail;
     String userDataString;
 
@@ -44,6 +48,7 @@ public class HomeActivity extends AppCompatActivity
 
         displayName = headerView.findViewById(R.id.user_name);
         displayEmail = headerView.findViewById(R.id.user_email);
+        displayUserImage = headerView.findViewById(R.id.user_imageView);
 
         userDataString = getIntent().getStringExtra("userData");
         try {
@@ -52,6 +57,7 @@ public class HomeActivity extends AppCompatActivity
 
             displayName.setText(userDataJson.getString("name"));
             displayEmail.setText(userDataJson.getString("email"));
+            Picasso.get().load(userDataJson.getString("userImageURL")).into(displayUserImage);
         } catch (JSONException e) {
             e.printStackTrace();
         }

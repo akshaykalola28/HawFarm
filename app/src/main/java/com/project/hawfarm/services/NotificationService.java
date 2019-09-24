@@ -1,20 +1,24 @@
 package com.project.hawfarm.services;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.project.hawfarm.HomeActivity;
+import com.project.hawfarm.LogInActivity;
 import com.project.hawfarm.R;
 
 public class NotificationService extends FirebaseMessagingService {
 
     private static final String TAG = "NotificationService";
+    private static final String CHANNEL_ID = "Default";
+    String imageUrl;
 
     public NotificationService() {
     }
@@ -23,26 +27,34 @@ public class NotificationService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        Log.d(TAG, "onMessageReceived: " + remoteMessage.getNotification().getTitle());
-
+        imageUrl = remoteMessage.getData().get("image");
+        Log.d(TAG, "onMessageReceived: " + remoteMessage.getNotification().getLink());
         sendNotification(remoteMessage.getNotification().getBody());
     }
 
     private void sendNotification(String messageBody) {
         Log.d(TAG, "sendNotification: " + messageBody);
-        Intent intent = new Intent(this, HomeActivity.class);
+
+        Intent intent = new Intent(this, LogInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+        final NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
         notificationBuilder.setContentTitle("HawFarm");
         notificationBuilder.setContentText(messageBody);
-        notificationBuilder.setSmallIcon(R.drawable.ic_history_black);
+        notificationBuilder.setSmallIcon(R.drawable.icon_black);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            notificationBuilder.setColor(getColor(R.color.colorAccent));
+        }
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Default Channel", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
         notificationManager.notify(0, notificationBuilder.build());
     }
 

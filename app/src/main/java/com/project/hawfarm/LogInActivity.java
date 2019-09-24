@@ -52,6 +52,7 @@ public class LogInActivity extends AppCompatActivity {
     Button btn_login;
     SharedPreferences mPreferences;
     ProgressDialog mDialog;
+    String notificationToken;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,6 +104,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LogInActivity.this, SignUpActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
 
@@ -112,6 +114,7 @@ public class LogInActivity extends AppCompatActivity {
                 if (getValidData()) {
                     mDialog = new ProgressDialog(LogInActivity.this);
                     mDialog.setMessage("Please Wait..");
+                    mDialog.setCanceledOnTouchOutside(false);
                     mDialog.show();
                     userLogin();
                 }
@@ -165,7 +168,7 @@ public class LogInActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d(TAG, "in Responce");
+                            Log.d(TAG, "in Response");
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("responseSuccess");
                             if (success.equals("true")) {
@@ -201,6 +204,7 @@ public class LogInActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("email", email);
                 params.put("password", pass);
+                params.put("notificationToken", notificationToken);
                 return params;
             }
         };
@@ -226,8 +230,7 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
-    private void generateFCMToken(){
-        // Get token
+    private void generateFCMToken() {
         // [START retrieve_current_token]
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -239,13 +242,8 @@ public class LogInActivity extends AppCompatActivity {
                         }
 
                         // Get new Instance ID token
-                        String token = task.getResult().getToken();
-                        Log.d("Token", token);
-
-                        // Log and toast
-                        /*@SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        Toast.makeText(LogInActivity.this, msg, Toast.LENGTH_SHORT).show();*/
+                        notificationToken = task.getResult().getToken();
+                        Log.d("Token", notificationToken);
                     }
                 });
         // [END retrieve_current_token]
