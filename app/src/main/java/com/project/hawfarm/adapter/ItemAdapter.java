@@ -58,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         try {
             itemViewHolder.itemName.setText(item.getString("veg_name"));
             itemViewHolder.itemDescription.setText(item.getString("description"));
-            Picasso.get().load(item.getString("imageURL")).into(itemViewHolder.vegImage);
+            Picasso.get().load(item.getString("stockImageURL")).into(itemViewHolder.vegImage);
 
             int price;
             if (fragment == null) {

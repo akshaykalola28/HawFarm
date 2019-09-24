@@ -126,7 +126,7 @@ public class AddItemDialog extends DialogFragment {
         try {
             itemNameField.setText(itemData.getString("veg_name"));
             descriptionField.setText(itemData.getString("description"));
-            Picasso.get().load(itemData.getString("imageURL")).into(itemImage);
+            Picasso.get().load(itemData.getString("stockImageURL")).into(itemImage);
             //textHawkerAddress.setText(hawkerData.getString("address"));
         } catch (Exception e) {
             e.printStackTrace();

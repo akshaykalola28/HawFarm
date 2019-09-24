@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.project.hawfarm.ItemListFragment;
 import com.project.hawfarm.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,6 +67,7 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
             }
             hawkerViewHolder.textVegName.setText(allVegName);
             hawkerViewHolder.textSellerName.setText(currentStock.getString("name"));
+            Picasso.get().load(currentStock.getString("userImageURL")).into(hawkerViewHolder.sellerImageView);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -75,7 +77,7 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
         Animation slideImage = AnimationUtils.loadAnimation(context, anim.item_list_animation_logo);
         hawkerViewHolder.sellerImageView.setAnimation(slideImage);
 
-        Animation slideRelativeLayout = AnimationUtils.loadAnimation(context,anim.item_list_animation_relativelayout);
+        Animation slideRelativeLayout = AnimationUtils.loadAnimation(context, anim.item_list_animation_relativelayout);
         hawkerViewHolder.container.setAnimation(slideRelativeLayout);
     }
 
@@ -97,7 +99,7 @@ public class HawkerAdapter extends RecyclerView.Adapter<HawkerAdapter.HawkerView
         public HawkerViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            container=itemView.findViewById(id.container);
+            container = itemView.findViewById(id.container);
             textSellerName = itemView.findViewById(id.text_seller_name);
             textVegName = itemView.findViewById(id.text_veg_name);
             textDescription = itemView.findViewById(id.text_desc);
