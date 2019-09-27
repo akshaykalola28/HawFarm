@@ -77,6 +77,7 @@ public class LogInActivity extends AppCompatActivity {
         passField = findViewById(R.id.input_password);
         btn_login = findViewById(R.id.btn_login);
 
+
         // shared preferences
         mPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
         checkSharedPreferences();
@@ -149,11 +150,12 @@ public class LogInActivity extends AppCompatActivity {
         boolean valid = false;
         email = emailField.getText().toString().trim();
         pass = passField.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        if (email.isEmpty()) {
-            emailField.setError("Enter E-mail");
+        if (!email.matches(emailPattern)) {
+            emailField.setError("Enter Valid E-mail");
             emailField.requestFocus();
-        } else if (pass.isEmpty()) {
+        } else if (pass.length()<8) {
             passField.setError("Enter Password");
             passField.requestFocus();
         } else {

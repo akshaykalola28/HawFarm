@@ -1,5 +1,6 @@
 package com.project.hawfarm;
 
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -51,7 +53,6 @@ public class HomeMainFragment extends Fragment {
         mViewPager.setAdapter(adapterView);
 
         RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.myRecyclerView);
-
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
@@ -76,7 +77,6 @@ public class HomeMainFragment extends Fragment {
                 fetchCurrentAllStock();
             }
         });
-
         fetchCurrentAllStock();
 
         return mainView;
@@ -127,4 +127,3 @@ public class HomeMainFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 }
-

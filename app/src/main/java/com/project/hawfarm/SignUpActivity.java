@@ -41,6 +41,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -152,15 +153,17 @@ public class SignUpActivity extends AppCompatActivity {
         mobileString = mobileField.getText().toString().trim();
         address = addressField.getText().toString().trim();
         pincodeString = pincodeField.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         if (name.isEmpty()) {
             nameField.setError("Enter Name");
             nameField.requestFocus();
-        } else if (email.isEmpty()) {
-            emailField.setError("Enter Email");
+        } else if (!email.matches(emailPattern)) {
+            emailField.setError("Enter Valid Email");
             emailField.requestFocus();
-        } else if (pass.isEmpty()) {
-            passField.setError("Enter Password");
+        } else if (pass.length()<8) {
+
+            passField.setError("Password must be 8 Char Long!");
             passField.requestFocus();
         } else if (cpass.isEmpty() || !pass.equals(cpass)) {
             cpassField.setError("Password are not match");
@@ -171,7 +174,7 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (address.isEmpty()) {
             addressField.setError("Enter Address");
             addressField.requestFocus();
-        } else if (pincodeString.isEmpty()) {
+        } else if (pincodeString.length()!= 6) {
             pincodeField.setError("Enter Pincode");
             pincodeField.requestFocus();
         } else {
@@ -255,15 +258,25 @@ public class SignUpActivity extends AppCompatActivity {
                 cursor.moveToFirst();
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 String picturePath = cursor.getString(columnIndex);
+                File file = new File(picturePath);
+                long length = file.length() / 1024; // Size in KB
                 cursor.close();
-                profileField.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
                 Bitmap bitmapForProfile = BitmapFactory.decodeFile(picturePath);
 
+                int  bitmapSize = bitmapForProfile.getByteCount();
+                Log.d("Original", "onActivityResult: " + bitmapSize + " | " + length);
+                final int idelSize = 500;//or the width you need
+
+                if (idelSize<length) {
+                    Toast.makeText(this, "Image is larger than 500kb", Toast.LENGTH_LONG).show();
+                } else {
                 //Base-64
+                    profileField.setImageBitmap(BitmapFactory.decodeFile(picturePath));
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmapForProfile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] imageBytes = baos.toByteArray();
-                baseImg = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                baseImg = Base64.encodeToString(imageBytes, Base64.DEFAULT);}
             } else {
                 //TODO: remove resultCode on release
                 Toast.makeText(SignUpActivity.this, "You haven't picked up Image: " + resultCode, Toast.LENGTH_LONG).show();
