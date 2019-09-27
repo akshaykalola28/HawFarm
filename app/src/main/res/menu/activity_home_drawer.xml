@@ -15,13 +15,12 @@
             android:title="Order History" />
     </group>
 
-    <item android:title="Communicate">
+    <!--<item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_account_balance"
                 android:title="@string/menu_share" />
         </menu>
-    </item>
-
+    </item>-->
 </menu>

@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,8 +29,8 @@ public class PaymentOptionActivity extends AppCompatActivity {
     RadioButton paytm, cod, debitcard, creaditcard;
     String grandTotal, paymentMethod;
     TextView orderItem;
-    private View view;
     ProgressDialog mDialog;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

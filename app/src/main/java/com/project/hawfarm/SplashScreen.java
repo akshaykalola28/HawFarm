@@ -3,15 +3,15 @@ package com.project.hawfarm;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static int wait= 2000;
+    private static int wait = 2000;
     SharedPreferences mPreferences;
 
     @Override
@@ -22,13 +22,14 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this,LogInActivity.class);
+                Intent intent = new Intent(SplashScreen.this, LogInActivity.class);
                 startActivity(intent);
                 finish();
             }
-        },wait);
+        }, wait);
         changeStatusBarColor();
     }
+
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();

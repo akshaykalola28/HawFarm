@@ -18,7 +18,6 @@ import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -27,13 +26,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -161,7 +160,7 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (!email.matches(emailPattern)) {
             emailField.setError("Enter Valid Email");
             emailField.requestFocus();
-        } else if (pass.length()<8) {
+        } else if (pass.length() < 8) {
 
             passField.setError("Password must be 8 Char Long!");
             passField.requestFocus();
@@ -174,7 +173,7 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (address.isEmpty()) {
             addressField.setError("Enter Address");
             addressField.requestFocus();
-        } else if (pincodeString.length()!= 6) {
+        } else if (pincodeString.length() != 6) {
             pincodeField.setError("Enter Pincode");
             pincodeField.requestFocus();
         } else {
@@ -243,6 +242,23 @@ public class SignUpActivity extends AppCompatActivity {
             }
         };
 
+        stringRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
         RequestQueue requestQueue = Volley.newRequestQueue(SignUpActivity.this);
         requestQueue.add(stringRequest);
     }
@@ -264,19 +280,20 @@ public class SignUpActivity extends AppCompatActivity {
 
                 Bitmap bitmapForProfile = BitmapFactory.decodeFile(picturePath);
 
-                int  bitmapSize = bitmapForProfile.getByteCount();
+                int bitmapSize = bitmapForProfile.getByteCount();
                 Log.d("Original", "onActivityResult: " + bitmapSize + " | " + length);
                 final int idelSize = 500;//or the width you need
 
-                if (idelSize<length) {
+                if (idelSize < length) {
                     Toast.makeText(this, "Image is larger than 500kb", Toast.LENGTH_LONG).show();
                 } else {
-                //Base-64
+                    //Base-64
                     profileField.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmapForProfile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] imageBytes = baos.toByteArray();
-                baseImg = Base64.encodeToString(imageBytes, Base64.DEFAULT);}
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmapForProfile.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    baseImg = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                }
             } else {
                 //TODO: remove resultCode on release
                 Toast.makeText(SignUpActivity.this, "You haven't picked up Image: " + resultCode, Toast.LENGTH_LONG).show();

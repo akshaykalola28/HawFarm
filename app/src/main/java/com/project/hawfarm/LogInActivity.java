@@ -1,6 +1,5 @@
 package com.project.hawfarm;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -155,7 +154,7 @@ public class LogInActivity extends AppCompatActivity {
         if (!email.matches(emailPattern)) {
             emailField.setError("Enter Valid E-mail");
             emailField.requestFocus();
-        } else if (pass.length()<8) {
+        } else if (pass.length() < 8) {
             passField.setError("Enter Password");
             passField.requestFocus();
         } else {
