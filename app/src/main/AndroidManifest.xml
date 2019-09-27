@@ -41,6 +41,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".OrderDetails"
+            android:label="Order Details"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ForgotPassword"

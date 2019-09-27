@@ -12,78 +12,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--<ImageView
-            android:id="@+id/company_logo"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/hawfarm_nameplate_1" />--> <!--center horizontal gravity-->
+    <ImageView
+        android:id="@+id/company_logo"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/hawfarm_nameplate_1" /> <!--center horizontal gravity-->
 
-        <RelativeLayout
-            android:id="@+id/profile_back"
-            android:layout_width="match_parent"
-            android:layout_height="170dp">
+    <android.support.v7.widget.CardView
+        android:id="@+id/sign_up_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/company_logo"
+       android:layout_marginStart="45dp"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="5dp"
+        app:contentPadding="10dp"
+        android:layout_marginBottom="15dp"
+        android:stateListAnimator="@anim/touchanim"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        tools:targetApi="lollipop">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:orientation="vertical">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary" />
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="#FFF" />
-            </LinearLayout>
-
-            <!-- Image View -->
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/input_profile_submit"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/profile_image"
-                app:civ_border="true"
-                app:civ_border_color="@color/colorAccent"
-                app:civ_border_width="1dp"
-                app:civ_shadow_radius="10" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/join_us_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profile_back"
-            android:gravity="center"
-            android:text="Join Us"
-            android:textAllCaps="true"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/sign_up_cardview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/join_us_text"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="15dp"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:stateListAnimator="@anim/touchanim"
-            app:cardCornerRadius="5dp"
-            app:contentPadding="10dp"
-            tools:targetApi="lollipop">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,6 +43,22 @@
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
+
+                <!-- Image View -->
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/input_profile_submit"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/profile_image"
+                    app:civ_border_width="1dp"
+                    app:civ_border="true"
+                    app:civ_border_color="@color/colorAccent"
+                    app:civ_shadow_radius="10" />
+
+
+
 
                 <!--  Name Label -->
                 <android.support.design.widget.TextInputLayout
@@ -194,28 +162,24 @@
                 <!-- Signup Button -->
                 <Button
                     android:id="@+id/btn_signup"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="24dp"
                     android:background="@drawable/button_style"
                     android:padding="12dp"
-                    android:paddingStart="30dp"
-                    android:paddingEnd="30dp"
                     android:text="@string/sign_up" />
+                <TextView
+                    android:id="@+id/link_login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/already_a_member_login"
+                    android:textColor="@color/Dark"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
-
-        <Button
-            android:id="@+id/link_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sign_up_cardview"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/back_to_login_button"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:text="Log In" />
     </RelativeLayout>
 </ScrollView>

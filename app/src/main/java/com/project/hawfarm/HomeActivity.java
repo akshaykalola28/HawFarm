@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity
     ImageView displayUserImage;
     TextView displayName, displayEmail;
     String userDataString;
+    JSONObject userDataJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class HomeActivity extends AppCompatActivity
 
         userDataString = getIntent().getStringExtra("userData");
         try {
-            JSONObject userDataJson = new JSONObject(userDataString.trim());
+            userDataJson = new JSONObject(userDataString.trim());
             CartData.currentCustomerData = userDataJson;
 
             displayName.setText(userDataJson.getString("name"));
@@ -126,5 +127,9 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public JSONObject getUser() {
+        return userDataJson;
     }
 }
