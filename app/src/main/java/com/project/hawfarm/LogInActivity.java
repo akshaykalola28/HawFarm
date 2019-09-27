@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -173,19 +172,24 @@ public class LogInActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("responseSuccess");
                             if (success.equals("true")) {
-                                String data = jsonObject.getString("data");
+                                JSONObject data = new JSONObject(jsonObject.getString("data"));
                                 Log.d(TAG, "data: " + data);
-                                savePreferences(data);
-                                mDialog.dismiss();
-                                Intent intent = new Intent(LogInActivity.this, HomeActivity.class);
-                                intent.putExtra("userData", data);
-                                startActivity(intent);
-                                finish();
+                                if (data.getString("user_type").equals("customer")) {
+                                    savePreferences(data.toString());
+                                    mDialog.dismiss();
+                                    Intent intent = new Intent(LogInActivity.this, HomeActivity.class);
+                                    intent.putExtra("userData", data.toString());
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    mDialog.dismiss();
+                                    Toast.makeText(LogInActivity.this,
+                                            "You Doesn't have an access for this App.", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 String data = jsonObject.getString("data");
                                 mDialog.dismiss();
-                                Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content),
-                                        data, Snackbar.LENGTH_INDEFINITE).show();
+                                Toast.makeText(LogInActivity.this, data, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             mDialog.dismiss();
@@ -197,7 +201,8 @@ public class LogInActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 mDialog.dismiss();
                 error.printStackTrace();
-                Toast.makeText(LogInActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogInActivity.this,
+                        "Something is Wrong! Please try again.", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

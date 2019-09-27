@@ -161,7 +161,6 @@ public class SignUpActivity extends AppCompatActivity {
             emailField.setError("Enter Valid Email");
             emailField.requestFocus();
         } else if (pass.length() < 8) {
-
             passField.setError("Password must be 8 Char Long!");
             passField.requestFocus();
         } else if (cpass.isEmpty() || !pass.equals(cpass)) {

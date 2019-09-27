@@ -121,7 +121,6 @@ public class HomeActivity extends AppCompatActivity
         }
         if (id == R.id.nav_order_history) {
             getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment, new OrderHistoryFragment()).commit();
-        } else if (id == R.id.nav_share) {
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
